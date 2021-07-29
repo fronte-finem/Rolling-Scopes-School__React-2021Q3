@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
+    "jsx": "react-jsx",
+    "noEmit": true,
+    "isolatedModules": true,
+    "downlevelIteration": true,
+    /* Strict Type-Checking Options */
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    /* Module Resolution Options */
+    "moduleResolution": "Node",
+    "baseUrl": "./src",
+    "paths": {
+      "@assets/*" : ["./assets/*"]
+    },
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    /* Experimental Options */
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    /* Advanced Options */
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "src",
+    "declaration.d.ts",
+    "webpack.config.ts",
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
