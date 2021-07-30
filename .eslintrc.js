@@ -1,8 +1,10 @@
+// https://github.com/prettier/eslint-plugin-prettier#recommended-configuration
+
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
-  extends: ['airbnb-typescript', 'prettier'],
+  extends: ['airbnb-typescript', 'plugin:prettier/recommended'],
   ignorePatterns: [
     '.eslintrc.js',
     'webpack.config.ts',
