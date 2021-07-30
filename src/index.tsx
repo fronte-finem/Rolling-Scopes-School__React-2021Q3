@@ -5,4 +5,12 @@ import ReactDOM from 'react-dom';
 
 import { App } from './app';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const render = () => {
+  const root = document.createElement('div');
+  root.setAttribute('id', 'root');
+  document.body.appendChild(root);
+
+  ReactDOM.render(<App />, root);
+};
+
+render();
