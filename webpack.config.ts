@@ -21,7 +21,7 @@ interface Env {
 
 const MY_BROWSER = { app: ['chrome', '--incognito'] };
 const BUILD_DIR = path.resolve(__dirname, 'dist');
-const MY_BUILD_DIR = `r:/${path.basename(__dirname)}`;
+const MY_BUILD_DIR = path.resolve('r:/', path.basename(__dirname));
 const EXTENSIONS = ['.ts', '.tsx', '.js', '.jsx'];
 
 enum Mode {
@@ -38,29 +38,29 @@ const isDev = process.env.NODE_ENV === Mode.DEV;
 const isProd = process.env.NODE_ENV === Mode.PROD;
 
 export default function getConfig({ myEnv }: Env): Configuration {
+  const outputPath = myEnv ? MY_BUILD_DIR : BUILD_DIR;
+
   return {
     mode: isDev ? Mode.DEV : Mode.PROD,
 
     entry: {
       [Entry.APP]: {
-        import: "./src/index.tsx",
+        import: ['./src/index.tsx'],
         dependOn: Entry.REACT,
-        filename: `${Entry.APP}.[contenthash].bundle.js`
+        filename: `${Entry.APP}.[contenthash].bundle.js`,
       },
       [Entry.REACT]: {
         import: ['react', 'react-dom'],
-        filename: `vendors/${Entry.REACT}.bundle.js`
-      }
+        filename: `vendors/${Entry.REACT}.bundle.js`,
+      },
     },
 
     output: {
-      path: myEnv ? MY_BUILD_DIR : BUILD_DIR,
+      path: outputPath,
       clean: true,
       publicPath: '',
       assetModuleFilename: 'assets/[name].[contenthash][ext]',
     },
-
-    devtool: isProd ? undefined : 'eval-cheap-source-map',
 
     optimization: isDev
       ? undefined
@@ -105,13 +105,15 @@ export default function getConfig({ myEnv }: Env): Configuration {
         {
           test: /\.(ts|js)x?$/i,
           exclude: [/node_modules/],
+          include: [/src/],
           use: [
             {
               loader: 'babel-loader',
+              options: { sourceMap: true },
             },
             {
               loader: '@linaria/webpack-loader',
-              options: { sourceMap: isDev },
+              options: { sourceMap: true },
             },
           ],
         },
@@ -119,11 +121,12 @@ export default function getConfig({ myEnv }: Env): Configuration {
         {
           test: /\.css$/i,
           exclude: [/node_modules/],
+          include: [/src/],
           use: [
             isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
             {
               loader: 'css-loader',
-              options: { sourceMap: isDev },
+              options: { sourceMap: true },
             },
           ],
         },
@@ -162,6 +165,20 @@ export default function getConfig({ myEnv }: Env): Configuration {
       new MiniCssExtractPlugin({
         filename: '[name].[contenthash].bundle.css',
       }),
+      ...(isDev
+        ? [
+            new webpack.EvalSourceMapDevToolPlugin({
+              exclude: 'vendors',
+            }),
+          ]
+        : [
+            new webpack.SourceMapDevToolPlugin({
+              exclude: 'vendors',
+              filename: '[file].map',
+            }),
+          ]),
     ],
+
+    devtool: false,
   };
 }
