@@ -1,16 +1,8 @@
-import {
-  EventType,
-  LectureType,
-  Platform,
-  RSSEvent,
-  Tag,
-  TaskType,
-} from './data-scheme';
+import { RSSTask, Tag, TaskType } from './data-scheme';
 
-export const getData = (): RSSEvent[] => [
+export const getData = (): RSSTask[] => [
   {
     id: 1,
-    type: EventType.TASK,
     taskType: TaskType.TEST,
     tags: [Tag.HTML, Tag.CSS],
     name: 'HTML/CSS Test #0',
@@ -34,7 +26,6 @@ export const getData = (): RSSEvent[] => [
 
   {
     id: 2,
-    type: EventType.TASK,
     taskType: TaskType.TEST,
     tags: [Tag.JS],
     name: 'JS Test #0',
@@ -59,7 +50,6 @@ export const getData = (): RSSEvent[] => [
 
   {
     id: 4,
-    type: EventType.TASK,
     taskType: TaskType.TEST,
     tags: [Tag.JS],
     name: 'Basic JS',
@@ -82,7 +72,6 @@ export const getData = (): RSSEvent[] => [
 
   {
     id: 6,
-    type: EventType.TASK,
     taskType: TaskType.CODE,
     tags: [Tag.GIT, Tag.HTML, Tag.CSS],
     name: 'HTML, CSS & Git Basics',
@@ -110,7 +99,6 @@ export const getData = (): RSSEvent[] => [
 
   {
     id: 11,
-    type: EventType.TASK,
     taskType: TaskType.CODE,
     tags: [Tag.HTML, Tag.CSS],
     name: 'Wildlife',
@@ -133,7 +121,6 @@ export const getData = (): RSSEvent[] => [
 
   {
     id: 21,
-    type: EventType.TASK,
     taskType: TaskType.CODE,
     tags: [Tag.JS],
     name: 'Virtual-piano',
@@ -161,7 +148,6 @@ export const getData = (): RSSEvent[] => [
 
   {
     id: 22,
-    type: EventType.TASK,
     taskType: TaskType.CODE,
     tags: [Tag.HTML, Tag.CSS, Tag.JS],
     name: 'Online-zoo',
@@ -189,7 +175,6 @@ export const getData = (): RSSEvent[] => [
 
   {
     id: 23,
-    type: EventType.TASK,
     taskType: TaskType.CODE,
     tags: [Tag.HTML, Tag.CSS],
     name: 'Clean-code-s1e1',
@@ -217,7 +202,6 @@ export const getData = (): RSSEvent[] => [
 
   {
     id: 24,
-    type: EventType.TASK,
     taskType: TaskType.TEST,
     tags: [Tag.JS],
     name: 'Codewars #1',
@@ -241,12 +225,11 @@ export const getData = (): RSSEvent[] => [
 
   {
     id: 31,
-    type: EventType.TASK,
     taskType: TaskType.PRESENTATION,
     tags: [],
-    name: 'https://rolling-scopes-school.github.io/stage0/#/stage1/tasks/self-introduction/self-introduction',
+    name: 'Self introduction',
     descriptionUrl:
-      'https://rolling-scopes-school.github.io/stage0/#/stage1/tasks/clean-code/clean-code-s1e1',
+      'https://rolling-scopes-school.github.io/stage0/#/stage1/tasks/self-introduction/self-introduction',
     dedicatedTime: {
       start: new Date('2021-04-09T18:00:00'),
       end: new Date('2021-04-20T02:59:00'),
@@ -269,7 +252,6 @@ export const getData = (): RSSEvent[] => [
 
   {
     id: 41,
-    type: EventType.TASK,
     taskType: TaskType.CODE,
     tags: [Tag.JS],
     name: 'Photo-filter',
@@ -297,7 +279,6 @@ export const getData = (): RSSEvent[] => [
 
   {
     id: 51,
-    type: EventType.TASK,
     taskType: TaskType.INTERVIEW,
     tags: [Tag.HTML, Tag.CSS, Tag.JS],
     name: 'Technical Screening',
@@ -324,7 +305,6 @@ export const getData = (): RSSEvent[] => [
 
   {
     id: 52,
-    type: EventType.TASK,
     taskType: TaskType.TEST,
     tags: [Tag.JS],
     name: 'Codewars #2',
@@ -348,7 +328,6 @@ export const getData = (): RSSEvent[] => [
 
   {
     id: 53,
-    type: EventType.TASK,
     taskType: TaskType.CODE,
     tags: [Tag.HTML, Tag.CSS, Tag.TS],
     name: 'Match-Match Game',
@@ -384,11 +363,11 @@ export const getData = (): RSSEvent[] => [
 
   {
     id: 54,
-    type: EventType.TASK,
     taskType: TaskType.PRESENTATION,
     tags: [],
-    name: 'https://github.com/rolling-scopes-school/tasks/blob/master/tasks/presentation.md',
-    descriptionUrl: 'Presentation (recorded)',
+    name: 'Presentation (recorded)',
+    descriptionUrl:
+      'https://github.com/rolling-scopes-school/tasks/blob/master/tasks/presentation.md',
     dedicatedTime: {
       start: new Date('2021-05-21T13:36:00'),
       end: new Date('2021-06-22T02:59:00'),
@@ -411,11 +390,11 @@ export const getData = (): RSSEvent[] => [
 
   {
     id: 55,
-    type: EventType.TASK,
     taskType: TaskType.PRESENTATION,
     tags: [],
-    name: 'https://github.com/rolling-scopes-school/tasks/blob/master/tasks/presentation.md',
-    descriptionUrl: 'Presentation (live)',
+    name: 'Presentation (live)',
+    descriptionUrl:
+      'https://github.com/rolling-scopes-school/tasks/blob/master/tasks/presentation.md',
     dedicatedTime: {
       start: new Date('2021-06-22T10:39:00'),
       end: new Date('2021-06-28T23:59:00'),
@@ -430,7 +409,6 @@ export const getData = (): RSSEvent[] => [
 
   {
     id: 61,
-    type: EventType.TASK,
     taskType: TaskType.CODE,
     tags: [Tag.HTML, Tag.CSS, Tag.TS],
     name: 'Async Race',
@@ -466,7 +444,6 @@ export const getData = (): RSSEvent[] => [
 
   {
     id: 71,
-    type: EventType.TASK,
     taskType: TaskType.CODE,
     tags: [Tag.HTML, Tag.CSS, Tag.TS],
     name: 'English for kids S1E1',
@@ -502,7 +479,6 @@ export const getData = (): RSSEvent[] => [
 
   {
     id: 72,
-    type: EventType.TASK,
     taskType: TaskType.CODE,
     tags: [Tag.HTML, Tag.CSS, Tag.TS],
     name: 'Chess',
@@ -538,7 +514,6 @@ export const getData = (): RSSEvent[] => [
 
   {
     id: 73,
-    type: EventType.TASK,
     taskType: TaskType.INTERVIEW,
     tags: [Tag.JS],
     name: 'CoreJS Interview',
@@ -564,59 +539,7 @@ export const getData = (): RSSEvent[] => [
   },
 
   {
-    id: 74,
-    type: EventType.LECTURE,
-    lectureType: LectureType.STREAM,
-    tags: [],
-    platform: Platform.YOUTUBE,
-    name: 'Q&A: Chess + English for kids',
-    descriptionUrl: 'https://youtube.com/',
-    date: new Date('2021-06-24T17:00:00'),
-    duration: 2,
-    taskOwner: {
-      id: 15,
-      githubId: 'jegius',
-      name: 'Ivan Alekseev',
-    },
-  },
-
-  {
-    id: 75,
-    type: EventType.LECTURE,
-    lectureType: LectureType.STREAM,
-    tags: [],
-    platform: Platform.YOUTUBE,
-    name: 'Refactoring Lecture',
-    descriptionUrl: 'https://youtube.com/',
-    date: new Date('2021-07-01T19:30:00'),
-    duration: 1.5,
-    taskOwner: {
-      id: 22,
-      githubId: 'nikitzu',
-      name: 'Mikita Zhuikou',
-    },
-  },
-
-  {
-    id: 76,
-    type: EventType.LECTURE,
-    lectureType: LectureType.STREAM,
-    tags: [],
-    platform: Platform.YOUTUBE,
-    name: 'NodeJS. Live Coding',
-    descriptionUrl: 'https://youtube.com/',
-    date: new Date('2021-07-06T18:30:00'),
-    duration: 2.5,
-    taskOwner: {
-      id: 21,
-      githubId: 'ai297',
-      name: 'Kris Casper',
-    },
-  },
-
-  {
     id: 81,
-    type: EventType.TASK,
     taskType: TaskType.CODE,
     tags: [Tag.HTML, Tag.CSS, Tag.TS],
     name: 'English for kids S1E2',
@@ -648,22 +571,5 @@ export const getData = (): RSSEvent[] => [
       },
     },
     passStudents: 274,
-  },
-
-  {
-    id: 82,
-    type: EventType.LECTURE,
-    lectureType: LectureType.STREAM,
-    tags: [],
-    platform: Platform.YOUTUBE,
-    name: 'Node.js Basic',
-    descriptionUrl: 'https://youtube.com/',
-    date: new Date('2021-07-08T18:00:00'),
-    duration: 2,
-    taskOwner: {
-      id: 15,
-      githubId: 'jegius',
-      name: 'Ivan Alekseev',
-    },
   },
 ];

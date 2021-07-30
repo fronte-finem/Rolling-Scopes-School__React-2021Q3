@@ -1,26 +1,8 @@
-export enum LectureType {
-  RECORD = 'recorded lecture',
-  STREAM = 'live stream',
-}
-
 export enum TaskType {
   TEST = 'test',
   CODE = 'code',
   PRESENTATION = 'presentation',
   INTERVIEW = 'interview',
-}
-
-export enum EventType {
-  LECTURE = 'lecture',
-  TASK = 'task',
-}
-
-export enum Platform {
-  YOUTUBE = 'youtube',
-  DISCORD = 'discord',
-  SKYPE = 'skype',
-  ZOOM = 'zoom',
-  OTHER = 'other',
 }
 
 export enum Tag {
@@ -50,25 +32,6 @@ export interface Period {
   end: Date;
 }
 
-export interface RSSEventBase {
-  type: EventType;
-  id: number;
-  name: string;
-  description?: string;
-  descriptionUrl?: string;
-  imageUrl?: string;
-  tags: Tag[];
-  taskOwner?: TaskOwner;
-}
-
-export interface RSSLecture extends RSSEventBase {
-  type: EventType.LECTURE;
-  lectureType: LectureType;
-  platform: Platform;
-  date: Date;
-  duration: number;
-}
-
 export interface Check {
   maxScore: number;
   scoreWeight: number;
@@ -78,8 +41,14 @@ export interface ManualCheck extends Check {
   dedicatedTime: Period;
 }
 
-export interface RSSTask extends RSSEventBase {
-  type: EventType.TASK;
+export interface RSSTask {
+  id: number;
+  name: string;
+  description?: string;
+  descriptionUrl?: string;
+  imageUrl?: string;
+  tags: Tag[];
+  taskOwner?: TaskOwner;
   taskType: TaskType;
   dedicatedTime: Period;
   autoCheck?: Check;
@@ -87,8 +56,6 @@ export interface RSSTask extends RSSEventBase {
   mentorCheck?: ManualCheck;
   passStudents?: number;
 }
-
-export type RSSEvent = RSSLecture | RSSTask;
 
 export const getCheckType = ({
   autoCheck,
