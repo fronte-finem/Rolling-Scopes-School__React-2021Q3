@@ -87,10 +87,7 @@ export default function getConfig({ myEnv }: Env): Configuration {
           hot: true,
           port: 8080,
           open: !myEnv ? true : MY_BROWSER,
-          overlay: {
-            warnings: true,
-            errors: true,
-          },
+          overlay: false,
         },
 
     module: {
@@ -146,8 +143,16 @@ export default function getConfig({ myEnv }: Env): Configuration {
         failOnWarning: true,
       }),
       ...(isDev
-        ? [new ReactRefreshWebpackPlugin()]
-        : [new CleanWebpackPlugin()]),
+        ? [
+            new ReactRefreshWebpackPlugin({
+              overlay: true,
+            }),
+          ]
+        : [
+            new CleanWebpackPlugin({
+              cleanStaleWebpackAssets: true,
+            }),
+          ]),
       new HtmlWebpackPlugin({
         template: 'src/index.html',
       }),
