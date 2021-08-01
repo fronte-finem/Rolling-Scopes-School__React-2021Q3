@@ -151,10 +151,10 @@ export const Card: React.FC<{ creature: Creature }> = ({ creature }) => {
     <CardStyle className={className} style={getFactionStyle(creature)}>
       <ResponsiveImage url={creature.imageUrl} alt={creature.name} />
       <Overlay />
-      <FactionSymbol />
       <Container>
         <Title text={creature.name} url={creature.wikiUrl} />
       </Container>
+      <FactionSymbol title={creature.faction} />
     </CardStyle>
   );
 };
