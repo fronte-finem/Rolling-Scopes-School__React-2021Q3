@@ -1,8 +1,7 @@
 import path from 'path';
 import webpack, { Configuration as WebpackConfiguration } from 'webpack';
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
-// @ts-ignore
-import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+// import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
@@ -84,7 +83,7 @@ export default function getConfig({ myEnv }: Env): Configuration {
       ? undefined
       : {
           contentBase: false,
-          hot: true,
+          hot: false,
           port: 8080,
           open: !myEnv ? true : MY_BROWSER,
           overlay: false,
@@ -147,9 +146,9 @@ export default function getConfig({ myEnv }: Env): Configuration {
       }),
       ...(isDev
         ? [
-            new ReactRefreshWebpackPlugin({
-              overlay: true,
-            }),
+            // new ReactRefreshWebpackPlugin({
+            //   overlay: true,
+            // }),
           ]
         : [
             new CleanWebpackPlugin({

@@ -3,8 +3,8 @@
   "private": true,
   "scripts": {
     "lint": "prettier -w ./src && eslint ./src --ext .ts,.tsx --fix",
-    "dev": "cross-env NODE_ENV=development webpack serve --hot --config ./webpack.config.ts",
-    "my-dev": "cross-env NODE_ENV=development webpack serve --hot --env myEnv --config ./webpack.config.ts",
+    "dev": "cross-env NODE_ENV=development webpack serve --config ./webpack.config.ts",
+    "my-dev": "cross-env NODE_ENV=development webpack serve --env myEnv --config ./webpack.config.ts",
     "prod": "npm run lint && cross-env NODE_ENV=production webpack --config ./webpack.config.ts",
     "my-prod": "cross-env NODE_ENV=production webpack --env myEnv --config ./webpack.config.ts"
   },
