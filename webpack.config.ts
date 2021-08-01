@@ -19,18 +19,14 @@ interface Env {
 }
 
 const MY_BROWSER = { app: ['chrome', '--incognito'] };
+const SRC_DIR = path.resolve(__dirname, 'src');
 const BUILD_DIR = path.resolve(__dirname, 'dist');
-const MY_BUILD_DIR = path.resolve('r:/', path.basename(__dirname));
+const MY_BUILD_DIR = path.resolve('r:', path.basename(__dirname));
 const EXTENSIONS = ['.ts', '.tsx', '.js', '.jsx'];
 
 enum Mode {
   DEV = 'development',
   PROD = 'production',
-}
-
-enum Entry {
-  APP = 'app',
-  REACT = 'react',
 }
 
 const isDev = process.env.NODE_ENV === Mode.DEV;
@@ -43,14 +39,8 @@ export default function getConfig({ myEnv }: Env): Configuration {
     mode: isDev ? Mode.DEV : Mode.PROD,
 
     entry: {
-      [Entry.APP]: {
-        import: ['./src/index.tsx'],
-        dependOn: Entry.REACT,
-        filename: `${Entry.APP}.[contenthash].bundle.js`,
-      },
-      [Entry.REACT]: {
-        import: ['react', 'react-dom'],
-        filename: `vendors/${Entry.REACT}.bundle.js`,
+      app: {
+        import: [path.resolve(SRC_DIR, 'index.tsx')],
       },
     },
 
@@ -58,12 +48,28 @@ export default function getConfig({ myEnv }: Env): Configuration {
       path: outputPath,
       clean: true,
       publicPath: '',
-      assetModuleFilename: 'assets/[name].[contenthash][ext]',
+      filename: '[name].[contenthash].bundle.js',
+      assetModuleFilename: `assets${path.sep}[name].[contenthash][ext]`,
     },
 
     optimization: isDev
       ? undefined
       : {
+          splitChunks: {
+            filename: `vendors${path.sep}[name].bundle.js`,
+            cacheGroups: {
+              react: {
+                test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+                name: 'react',
+                chunks: 'all',
+              },
+              commons: {
+                test: /[\\/]node_modules[\\/]/,
+                name: 'commons',
+                chunks: 'all',
+              },
+            },
+          },
           minimizer: [
             `...`,
             new CssMinimizerPlugin({
@@ -156,7 +162,7 @@ export default function getConfig({ myEnv }: Env): Configuration {
             }),
           ]),
       new HtmlWebpackPlugin({
-        template: 'src/index.html',
+        template: path.resolve(SRC_DIR, 'index.html'),
       }),
       new CopyPlugin({
         patterns: [{ from: 'public' }],
