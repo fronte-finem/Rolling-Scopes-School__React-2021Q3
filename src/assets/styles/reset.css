@@ -22,10 +22,6 @@ html {
   vertical-align: inherit;
 }
 
-html:focus-within {
-  scroll-behavior: smooth;
-}
-
 html,
 body,
 p,
@@ -53,6 +49,10 @@ pre {
   padding: 0;
 }
 
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
 h1,
 h2,
 h3,
@@ -64,33 +64,42 @@ h6 {
   line-height: 1.2;
   font-weight: normal;
 }
+
 h1,
 h2 {
   margin: 1.3em 0 1em;
 }
+
 h3,
 h4 {
   margin: 0.9em 0 0.5em;
 }
+
 h5,
 h6 {
   margin: 0.5em 0 0.25em;
 }
+
 h1 {
   font-size: 2.5em;
 }
+
 h2 {
   font-size: 2.2em;
 }
+
 h3 {
   font-size: 1.9em;
 }
+
 h4 {
   font-size: 1.6em;
 }
+
 h5 {
   font-size: 1.3em;
 }
+
 h6 {
   font-size: 1em;
 }
@@ -146,6 +155,22 @@ th {
   padding: 0;
 }
 
+a {
+  color: #08f;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+a:active {
+  color: #048;
+}
+
+a:hover,
+a:focus {
+  color: #06c;
+  text-decoration: underline;
+}
+
 a:active,
 a:hover {
   outline-width: 0;
@@ -155,7 +180,7 @@ code,
 kbd,
 pre,
 samp {
-  font-family: monospace, monospace;
+  font-family: monospace;
   font-size: 1em;
 }
 
@@ -210,18 +235,4 @@ textarea:focus {
 progress {
   display: inline-block;
   vertical-align: baseline;
-}
-
-a {
-  color: #0088ff;
-  text-decoration: none;
-  background-color: transparent;
-}
-a:hover,
-a:focus {
-  color: #0066cc;
-  text-decoration: underline;
-}
-a:active {
-  color: #004488;
 }
