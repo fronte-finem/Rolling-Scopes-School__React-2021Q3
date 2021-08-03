@@ -18,5 +18,6 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'react/prop-types': 'off',
     'react/require-default-props': 'off',
+    'react/jsx-props-no-spreading': ['error', { custom: 'ignore' }],
   },
 };
