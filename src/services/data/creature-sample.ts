@@ -515,7 +515,7 @@ export const getCreatures = (): Creature[] => [
     name: 'Marksman',
     faction: Faction.HAVEN,
     tier: Tier.CORE,
-    upgraded: false,
+    upgraded: true,
     size: Size.SMALL,
     stats: {
       attack: {
