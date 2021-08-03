@@ -1,4 +1,6 @@
 import '@assets/styles/reset.css';
+import '@assets/styles/fonts.css';
+import '@assets/styles/main.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
