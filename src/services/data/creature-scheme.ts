@@ -97,3 +97,7 @@ export interface Creature {
   stats: Stats;
   cost: Cost[];
 }
+
+export interface CreatureProps {
+  creature: Creature;
+}
