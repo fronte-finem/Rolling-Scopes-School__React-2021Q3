@@ -1,7 +1,7 @@
 import path from 'path';
 import webpack, { Configuration as WebpackConfiguration } from 'webpack';
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
-// import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
@@ -18,7 +18,7 @@ interface Env {
   myEnv?: boolean;
 }
 
-const MY_BROWSER = { app: ['chrome', '--incognito'] };
+const MY_BROWSER = { app: { name: 'chrome', arguments: ['--incognito'] } };
 const SRC_DIR = path.resolve(__dirname, 'src');
 const BUILD_DIR = path.resolve(__dirname, 'dist');
 const MY_BUILD_DIR = path.resolve('r:', path.basename(__dirname));
@@ -32,7 +32,7 @@ enum Mode {
 const isDev = process.env.NODE_ENV === Mode.DEV;
 const isProd = process.env.NODE_ENV === Mode.PROD;
 
-export default function getConfig({ myEnv }: Env): Configuration {
+export default function getConfig({ myEnv }: Env) {
   const outputPath = myEnv ? MY_BUILD_DIR : BUILD_DIR;
 
   return {
@@ -46,17 +46,30 @@ export default function getConfig({ myEnv }: Env): Configuration {
 
     output: {
       path: outputPath,
-      clean: true,
-      publicPath: '',
       filename: '[name].[contenthash].bundle.js',
-      assetModuleFilename: `assets${path.sep}[name].[contenthash][ext]`,
+      assetModuleFilename: `assets/[hash][ext][query]`,
     },
 
-    optimization: isDev
+    devServer: isProd
       ? undefined
       : {
+          hot: true,
+          host: 'localhost',
+          port: 8080,
+          open: myEnv ? MY_BROWSER : true,
+          client: {
+            overlay: true,
+          },
+        },
+
+    optimization: isDev
+      ? {
+          minimize: false,
+          runtimeChunk: 'single',
+        }
+      : {
           splitChunks: {
-            filename: `vendors${path.sep}[name].bundle.js`,
+            filename: `vendors/[name].bundle.js`,
             cacheGroups: {
               react: {
                 test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
@@ -85,26 +98,22 @@ export default function getConfig({ myEnv }: Env): Configuration {
           ],
         },
 
-    devServer: isProd
-      ? undefined
-      : {
-          contentBase: false,
-          hot: false,
-          port: 8080,
-          open: !myEnv ? true : MY_BROWSER,
-          overlay: false,
-        },
-
     module: {
       rules: [
         {
           test: /\.(jpe?g|png|svg|gif)$/i,
           type: 'asset/resource',
+          generator: {
+            filename: 'assets/images/[hash][ext][query]',
+          },
         },
 
         {
           test: /\.(woff2?|eot|ttf|otf)$/i,
           type: 'asset/resource',
+          generator: {
+            filename: 'assets/fonts/[hash][ext][query]',
+          },
         },
 
         {
@@ -152,9 +161,10 @@ export default function getConfig({ myEnv }: Env): Configuration {
       }),
       ...(isDev
         ? [
-            // new ReactRefreshWebpackPlugin({
-            //   overlay: true,
-            // }),
+            new ReactRefreshWebpackPlugin({
+              overlay: true,
+            }),
+            // new webpack.HotModuleReplacementPlugin(),
           ]
         : [
             new CleanWebpackPlugin({
