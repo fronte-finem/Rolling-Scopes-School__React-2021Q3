@@ -1,5 +1,5 @@
 {
-  "name": "react-course",
+  "name": "react-components",
   "private": true,
   "scripts": {
     "lint": "prettier -w ./src && eslint ./src --ext .ts,.tsx --fix",
