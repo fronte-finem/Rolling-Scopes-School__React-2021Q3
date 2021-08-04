@@ -1,5 +1,4 @@
 import path from 'path';
-import childProcess from 'child_process';
 import webpack, { Configuration as WebpackConfiguration } from 'webpack';
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
@@ -20,14 +19,9 @@ interface Env {
   myEnv?: boolean;
 }
 
-const GIT_CURRENT_BRANCH_NAME = 'git branch --show-current';
-
 const SRC_NAME = 'src';
 const DIST_NAME = 'dist';
-const BRANCH_NAME = childProcess
-  .execSync(GIT_CURRENT_BRANCH_NAME)
-  .toString()
-  .trim();
+const BRANCH_NAME = 'react-components';
 
 const SRC_DIR = path.resolve(__dirname, SRC_NAME);
 const BUILD_DIR = path.resolve(__dirname, DIST_NAME, BRANCH_NAME);
