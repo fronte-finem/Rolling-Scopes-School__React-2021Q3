@@ -12,3 +12,6 @@
 
   # Default build command.
   command = "echo 'default context'"
+
+[context.react-components] # “react-components” is a branch name
+  command = "npm run prod"
