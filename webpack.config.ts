@@ -24,14 +24,14 @@ const GIT_CURRENT_BRANCH_NAME = 'git branch --show-current';
 
 const SRC_NAME = 'src';
 const DIST_NAME = 'dist';
-const MY_DIST_NAME = childProcess
+const BRANCH_NAME = childProcess
   .execSync(GIT_CURRENT_BRANCH_NAME)
   .toString()
   .trim();
 
 const SRC_DIR = path.resolve(__dirname, SRC_NAME);
-const BUILD_DIR = path.resolve(__dirname, DIST_NAME);
-const MY_BUILD_DIR = path.resolve('r:', MY_DIST_NAME);
+const BUILD_DIR = path.resolve(__dirname, DIST_NAME, BRANCH_NAME);
+const MY_BUILD_DIR = path.resolve('r:', BRANCH_NAME);
 
 const MY_BROWSER = { app: { name: 'chrome', arguments: ['--incognito'] } };
 const EXTENSIONS = ['.ts', '.tsx', '.js', '.jsx'];
