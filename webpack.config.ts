@@ -9,6 +9,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import ESLintWebpackPlugin from 'eslint-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import ImageMinimizerPlugin from 'image-minimizer-webpack-plugin';
 
 interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration;
@@ -192,6 +193,26 @@ export default function getConfig({ myEnv }: Env) {
               filename: '[file].map',
             }),
           ]),
+      new ImageMinimizerPlugin({
+        minimizerOptions: {
+          plugins: [
+            'gifsicle',
+            'mozjpeg',
+            'pngquant',
+            [
+              'svgo',
+              {
+                plugins: [
+                  {
+                    name: 'removeUselessDefs',
+                    active: false,
+                  },
+                ],
+              },
+            ],
+          ],
+        },
+      }),
     ],
 
     devtool: false,
