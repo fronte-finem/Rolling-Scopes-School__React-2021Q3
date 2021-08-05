@@ -1,0 +1,20 @@
+.person-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 10px;
+  padding: 10px;
+  border: 3px solid #fff;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 30px;
+}
