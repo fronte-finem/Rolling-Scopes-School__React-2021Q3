@@ -1,0 +1,20 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #fff4;
+  color: #fff;
+}
+
+.label {
+  font-family: var(--ff-code);
+  user-select: none;
+}
+
+.input {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding-left: 10px;
+}
