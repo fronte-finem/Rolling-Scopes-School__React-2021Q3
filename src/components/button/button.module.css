@@ -1,0 +1,32 @@
+.button {
+  --c1: #f80;
+  --c2: #fff;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 30px;
+  font-family: var(--ff-code);
+  font-size: 20px;
+  background: transparent;
+  border: 2px solid var(--c1);
+  color: var(--c1);
+  cursor: pointer;
+  transition: all 200ms;
+
+  &:hover {
+    background: var(--c1);
+    color: var(--c2);
+  }
+
+  &:active {
+    border-color: var(--c2);
+    background: var(--c2);
+    color: var(--c1);
+  }
+
+  &.secondary {
+    --c1: #08f;
+  }
+}
