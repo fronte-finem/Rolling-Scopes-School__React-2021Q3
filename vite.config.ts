@@ -23,6 +23,10 @@ export default defineConfig(({ command, mode }) => {
       modules: {
         localsConvention: 'camelCase',
       },
+      postcss: {
+        map: { inline: false },
+        plugins: [require('postcss-nested')],
+      },
     },
 
     build: {
