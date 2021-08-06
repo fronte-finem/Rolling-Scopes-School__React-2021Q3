@@ -1,20 +1,30 @@
 .person-form {
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr;
-  row-gap: 10px;
+  grid-template-rows: 1fr auto;
+  gap: 10px;
   padding: 10px;
-  border: 3px solid #fff;
+  background: #0004;
+  border-radius: 5px;
+}
+
+.inputs {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  //grid-auto-rows: 1fr;
+  gap: 10px;
+  border: 1px solid #fff2;
+  border-radius: 5px;
+  padding: 10px;
 }
 
 .buttons {
   display: flex;
-  justify-content: space-evenly;
-}
-
-.button {
-  display: flex;
   justify-content: center;
-  align-items: center;
-  width: 150px;
-  height: 30px;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
 }
