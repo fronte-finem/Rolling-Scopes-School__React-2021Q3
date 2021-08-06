@@ -1,0 +1,25 @@
+.date {
+  position: relative;
+  cursor: pointer;
+
+  &.clickable::-webkit-calendar-picker-indicator {
+    position: absolute;
+    left: var(--left);
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: auto;
+    height: auto;
+    margin: 0;
+    background-color: #0000;
+    background-position: right;
+    cursor: pointer;
+  }
+
+  &.full {
+    --left: 0;
+  }
+  &.half {
+    --left: 50%;
+  }
+}
