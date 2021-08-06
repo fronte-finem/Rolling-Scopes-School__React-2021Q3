@@ -1,21 +1,12 @@
 import React from 'react';
 // import classes from './text.module.css';
-import { ErrorProps, InputWrapper } from './wrapper';
+import { InputWrapper } from './wrapper';
+import { ErrorProps, InputStaticProps } from './types';
 
-export interface ValidateTextProps {
-  isValid: (value: string) => boolean;
-  message: string;
-}
-
-export interface InputTextProps {
-  id: string;
-  name?: string;
-  label: string;
-  placeholder?: string;
+export interface InputTextProps extends InputStaticProps, ErrorProps {
   onInput: (value: string) => void;
+  onInvalid: () => void;
   value: string;
-  error?: ErrorProps;
-  required?: boolean;
 }
 
 export const InputText: React.FC<InputTextProps> = ({
@@ -24,8 +15,10 @@ export const InputText: React.FC<InputTextProps> = ({
   label,
   placeholder,
   onInput,
+  onInvalid,
   value,
-  error,
+  errorMessage,
+  isError,
   required,
 }) => {
   const handleInput = (event: React.FormEvent<HTMLInputElement>) => {
@@ -33,15 +26,13 @@ export const InputText: React.FC<InputTextProps> = ({
   };
 
   return (
-    <InputWrapper id={id} label={label} error={error}>
+    <InputWrapper {...{ id, label, errorMessage, isError }}>
       <input
+        {...{ id, placeholder, required, value }}
         type="text"
-        id={id}
         name={name || id}
-        placeholder={placeholder}
         onInput={handleInput}
-        value={value}
-        required={required}
+        onInvalid={onInvalid}
       />
     </InputWrapper>
   );
