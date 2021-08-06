@@ -23,6 +23,14 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'react/prop-types': 'off',
     'react/require-default-props': 'off',
-    'react/jsx-props-no-spreading': ['error', { custom: 'ignore' }],
+    'react/jsx-props-no-spreading': 'off',
+    'no-underscore-dangle': ['error', { allowAfterThis: true }],
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-use-before-define': ['error', { functions: false }],
+    '@typescript-eslint/lines-between-class-members': [
+      'error',
+      'always',
+      { exceptAfterOverload: true, exceptAfterSingleLine: true },
+    ],
   },
 };
