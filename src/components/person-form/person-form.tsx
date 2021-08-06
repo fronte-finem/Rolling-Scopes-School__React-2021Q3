@@ -1,192 +1,134 @@
 import React, { useState } from 'react';
-import {
-  InputText,
-  InputTextProps,
-  ValidateTextProps,
-} from 'components/input/text';
-import { dateToString, InputDate } from 'components/input/date';
+import { InputText } from 'components/input/text';
+import { InputDate } from 'components/input/date';
 import { Select } from 'components/input/select';
 import { Checkbox } from 'components/input/checkbox';
-import { Switcher, SwitcherProps } from 'components/input/switcher';
-import { LANGUAGE_MAP } from 'shared/data/language-map';
-import { EMAIL_REGEX } from 'shared/regex/email';
+import { Switcher } from 'components/input/switcher';
+import btnClasses from 'components/button/button.module.css';
 import classes from './person-form.module.css';
+import {
+  AGREEMENT,
+  BIRTHDATE,
+  EMAIL,
+  FIRST_NAME,
+  GENDER,
+  LANGUAGE,
+  LAST_NAME,
+} from './static-props';
+import {
+  InferInputStateGenericType,
+  INITIAL_PERSON_FORM_STATE,
+  invalidate,
+  isValid,
+  PersonFormData,
+  PersonFormState,
+  stateToData,
+  validate,
+} from './state';
+import { dateToString } from './validation';
 
-const VALIDATE_NAME: ValidateTextProps = {
-  message: 'Name is limited to 3-30 alphabet characters',
-  isValid: (value: string) => /^\p{Alpha}{3,30}$/u.test(value),
-};
-
-const VALIDATE_EMAIL: ValidateTextProps = {
-  message: 'Email invalid according RFC 5322 Official Standard',
-  isValid: (value: string) => EMAIL_REGEX.test(value),
-};
-
-interface ValidateDate {
-  message: string;
-  isValid: (value: Date | null) => boolean;
+interface PersonFormProps {
+  onSubmit?: (data: PersonFormData) => void;
 }
 
-const MAX_DATE = new Date();
-const MIN_DATE = new Date();
-MIN_DATE.setFullYear(MAX_DATE.getFullYear() - 120);
-
-const isDateClamp = (date: number) =>
-  date >= MIN_DATE.getTime() && date <= MAX_DATE.getTime();
-
-const VALIDATE_DATE: ValidateDate = {
-  message: `Date invalid if unset or before ${dateToString(
-    MIN_DATE
-  )} or after ${dateToString(MAX_DATE)}`,
-  isValid: (value: Date | null) =>
-    value !== null && isDateClamp(value.getTime()),
-};
-
-type InputTextConst = Pick<
-  InputTextProps,
-  'id' | 'label' | 'placeholder' | 'required'
->;
-
-const FIRST_NAME: InputTextConst = {
-  id: 'first-name',
-  label: 'First name:',
-  placeholder: 'Jane',
-  required: true,
-};
-
-const LAST_NAME: InputTextConst = {
-  id: 'last-name',
-  label: 'Last name:',
-  placeholder: 'Doe',
-  required: true,
-};
-
-const EMAIL: InputTextConst = {
-  id: 'email',
-  label: 'Email:',
-  placeholder: 'jane-doe@e.mail',
-  required: true,
-};
-
-const GENDER: Omit<SwitcherProps, 'onChange'> = {
-  id: 'gender',
-  label: 'Gender:',
-  value1: 'female',
-  value2: 'male',
-};
-
-interface InputState<T> {
-  value: T;
-  isError: boolean;
-}
-
-interface PersonFormState {
-  firstName: InputState<string>;
-  lastName: InputState<string>;
-  email: InputState<string>;
-  gender: InputState<string>;
-  birthdate: InputState<Date | null>;
-  isStudent: InputState<boolean>;
-  language: InputState<string>;
-}
-
-const INITIAL_PERSON_FORM_STATE = {
-  firstName: { value: '', isError: false },
-  lastName: { value: '', isError: false },
-  email: { value: '', isError: false },
-  gender: { value: GENDER.value1, isError: false },
-  birthdate: { value: null, isError: false },
-  isStudent: { value: false, isError: false },
-  language: { value: LANGUAGE_MAP.keys().next().value, isError: false },
-};
-
-export const PersonForm: React.FC = () => {
-  const [data, setData] = useState<PersonFormState>(INITIAL_PERSON_FORM_STATE);
+export const PersonForm: React.FC<PersonFormProps> = ({ onSubmit }) => {
+  const [personFormState, setPersonFormState] = useState(
+    INITIAL_PERSON_FORM_STATE
+  );
 
   const handleReset = () => {
-    setData(INITIAL_PERSON_FORM_STATE);
+    setPersonFormState(INITIAL_PERSON_FORM_STATE);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (!isValid(personFormState)) return;
+    onSubmit?.(stateToData(personFormState));
   };
 
-  const handleName = (key: keyof PersonFormState) => (value: string) => {
-    const isError = !VALIDATE_NAME.isValid(value);
-    setData((prev) => ({ ...prev, [key]: { value, isError } }));
-  };
+  function handleInput<K extends keyof PersonFormState>(key: K) {
+    return (value: InferInputStateGenericType<PersonFormState[K]>) => {
+      setPersonFormState((prev) => validate(prev, key, value));
+    };
+  }
 
-  const handleEmail = (value: string) => {
-    const isError = !VALIDATE_EMAIL.isValid(value);
-    setData((prev) => ({ ...prev, email: { value, isError } }));
-  };
-
-  const handleDate = (value: Date | null) => {
-    const isError = !VALIDATE_DATE.isValid(value);
-    setData((prev) => ({ ...prev, birthdate: { value, isError } }));
-  };
-
-  const handleGender = (value: string) => {
-    setData((prev) => ({ ...prev, gender: { value, isError: false } }));
-  };
+  function handleInvalid<K extends keyof PersonFormState>(key: K) {
+    return () => {
+      setPersonFormState((prev) => invalidate(prev, key));
+    };
+  }
 
   return (
     <form className={classes.personForm} onSubmit={handleSubmit}>
-      <InputText
-        {...FIRST_NAME}
-        onInput={handleName('firstName')}
-        value={data.firstName.value}
-        error={{
-          isError: data.firstName.isError,
-          message: VALIDATE_NAME.message,
-        }}
-      />
+      <div className={classes.inputs}>
+        <InputText
+          {...FIRST_NAME}
+          onInput={handleInput('firstName')}
+          onInvalid={handleInvalid('firstName')}
+          value={personFormState.firstName.value}
+          isError={personFormState.firstName.isError}
+        />
 
-      <InputText
-        {...LAST_NAME}
-        onInput={handleName('lastName')}
-        value={data.lastName.value}
-        error={{
-          isError: data.lastName.isError,
-          message: VALIDATE_NAME.message,
-        }}
-      />
+        <InputText
+          {...LAST_NAME}
+          onInput={handleInput('lastName')}
+          onInvalid={handleInvalid('lastName')}
+          value={personFormState.lastName.value}
+          isError={personFormState.lastName.isError}
+        />
 
-      <InputText
-        {...EMAIL}
-        onInput={handleEmail}
-        value={data.email.value}
-        error={{ isError: data.email.isError, message: VALIDATE_EMAIL.message }}
-      />
+        <InputText
+          {...EMAIL}
+          onInput={handleInput('email')}
+          onInvalid={handleInvalid('email')}
+          value={personFormState.email.value}
+          isError={personFormState.email.isError}
+        />
 
-      <Switcher {...GENDER} onChange={handleGender} />
+        <Switcher
+          {...GENDER}
+          onChange={handleInput('gender')}
+          onInvalid={handleInvalid('gender')}
+          value={personFormState.gender.value}
+        />
 
-      <InputDate
-        id="birthdate"
-        label="Birthdate:"
-        onInput={handleDate}
-        value={
-          data.birthdate.value
-            ? data.birthdate.value?.toISOString().split('T')[0]
-            : ''
-        }
-        min={dateToString(MIN_DATE)}
-        max={dateToString(MAX_DATE)}
-        error={{
-          isError: data.birthdate.isError,
-          message: VALIDATE_DATE.message,
-        }}
-      />
+        <InputDate
+          {...BIRTHDATE}
+          onInput={handleInput('birthdate')}
+          onInvalid={handleInvalid('birthdate')}
+          value={
+            personFormState.birthdate.value
+              ? dateToString(personFormState.birthdate.value)
+              : ''
+          }
+          isError={personFormState.birthdate.isError}
+        />
 
-      <Checkbox id="is-student" label="I'm student:" />
+        <Select
+          {...LANGUAGE}
+          onInput={handleInput('language')}
+          onInvalid={handleInvalid('language')}
+          value={personFormState.language.value}
+          isError={personFormState.language.isError}
+        />
 
-      <Select id="language" label="Main coding language:" data={LANGUAGE_MAP} />
+        <Checkbox
+          {...AGREEMENT}
+          onChange={handleInput('agreement')}
+          onInvalid={handleInvalid('agreement')}
+          value={personFormState.agreement.value}
+          isError={personFormState.agreement.isError}
+        />
+      </div>
 
       <div className={classes.buttons}>
-        <button className={classes.button} type="button" onClick={handleReset}>
+        <button
+          className={`${btnClasses.button} ${btnClasses.secondary}`}
+          type="button"
+          onClick={handleReset}>
           Reset
         </button>
-        <button className={classes.button} type="submit">
+        <button className={btnClasses.button} type="submit">
           Create
         </button>
       </div>
