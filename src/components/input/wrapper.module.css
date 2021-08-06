@@ -1,11 +1,20 @@
 .wrapper {
+  --normal-c: 190, 100%, 50%;
+  --error-c: 22, 100%, 63%;
+
   display: flex;
   flex-direction: column;
   row-gap: 5px;
   padding: 5px;
   border-radius: 5px;
-  border: 1px solid #fff4;
-  color: #fff;
+  border: 1px solid hsla(var(--normal-c), 0.1);
+  background-color: hsla(var(--normal-c), 0.05);
+  color: hsla(var(--normal-c), 1);
+
+  &.error {
+    border-color: hsla(var(--error-c), 0.4);
+    background-color: hsla(var(--error-c), 0.1);
+  }
 }
 
 .label {
@@ -17,4 +26,8 @@
   display: grid;
   grid-template-columns: 1fr;
   padding-left: 10px;
+}
+
+.error-message {
+  color: hsla(var(--error-c), 1);
 }

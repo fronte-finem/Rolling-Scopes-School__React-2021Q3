@@ -1,28 +1,21 @@
 import React from 'react';
 import classes from './wrapper.module.css';
+import { ErrorProps, InputStaticProps } from './types';
 
-export interface ErrorProps {
-  isError: boolean;
-  message: string;
-}
-
-export interface InputWrapperProps {
-  id: string;
-  label: string;
-  error?: ErrorProps;
-}
-
-export const InputWrapper: React.FC<InputWrapperProps> = ({
+export const InputWrapper: React.FC<InputStaticProps & ErrorProps> = ({
   id,
   label,
+  errorMessage,
   children,
-  error,
+  isError,
 }) => {
   return (
-    <label htmlFor={id} className={classes.wrapper}>
+    <label
+      htmlFor={id}
+      className={`${classes.wrapper} ${isError ? classes.error : ''}`}>
       <div className={classes.label}>{label}</div>
       <div className={classes.input}>{children}</div>
-      {error?.isError && <div className={classes.error}>{error.message}</div>}
+      {isError && <div className={classes.errorMessage}>{errorMessage}</div>}
     </label>
   );
 };
