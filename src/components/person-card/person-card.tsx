@@ -2,25 +2,7 @@ import React from 'react';
 import { PersonFormData } from 'components/person-form/state';
 import { LANGUAGE_MAP } from 'shared/data/language-map';
 import classes from './person-card.module.css';
-
-interface PersonCardItemProps {
-  term: string;
-  description: string;
-}
-
-const PersonCardItem: React.FC<PersonCardItemProps> = ({
-  term,
-  description,
-}) => {
-  return (
-    <>
-      <dt className={`${classes.cell} ${classes.term}`}>{term}:</dt>
-      <dd className={`${classes.cell} ${classes.description}`}>
-        {description}
-      </dd>
-    </>
-  );
-};
+import { PersonCardItem } from './person-card-item';
 
 interface PersonCardProps {
   data: PersonFormData;

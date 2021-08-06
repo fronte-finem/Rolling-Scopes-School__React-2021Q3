@@ -9,19 +9,3 @@
   background: #fff4;
   text-overflow: ellipsis;
 }
-
-.cell {
-  display: block;
-  margin: 0;
-  padding: 5px;
-  background: #0002;
-}
-
-.term {
-  font-family: var(--ff-code);
-}
-
-.description {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
