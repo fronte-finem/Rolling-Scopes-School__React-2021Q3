@@ -1,11 +1,12 @@
 .switcher {
   position: relative;
-  border: 1px solid #fff;
+  border: 2px solid #fff;
   border-radius: 100px;
   overflow: hidden;
-  width: 100px;
+  width: 150px;
   cursor: pointer;
   user-select: none;
+  color: #fff;
 }
 
 .check {
@@ -20,27 +21,40 @@
 }
 
 .plank {
+  --handle-w: 22px;
+  --plank-w: calc(200% - 1 * var(--handle-w));
+  --move-w: calc(-50% + 0.5 * var(--handle-w));
+  width: var(--plank-w);
   display: grid;
-  grid-template-columns: 80% 20% 80%;
+  grid-template-columns: 1fr var(--handle-w) 1fr;
   align-items: center;
+  background: linear-gradient(90deg, #f80 10%, #08f 90%);
   transition: all 300ms;
 }
 
 .check:checked ~ .plank {
-  transform: translateX(-80%);
+  transform: translateX(var(--move-w));
 }
 
 .handle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
-  border-radius: 50%;
-  background: #fff;
+  background: #fff0;
+  &::before {
+    content: '';
+    display: block;
+    height: 90%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background: #fff;
+  }
 }
 
 .value {
   padding: 0 10px;
   pointer-events: none;
-}
-.value:last-child {
-  text-align: right;
+  text-align: center;
 }
