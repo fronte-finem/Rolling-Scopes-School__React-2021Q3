@@ -14,12 +14,8 @@ export const App = () => {
   return (
     <div className={classes.app}>
       <div className={classes.container}>
-        <div className={classes.containerForm}>
-          <PersonForm onSubmit={handleSubmit} />
-        </div>
-        <div className={classes.containerField}>
-          <PersonCardsField dataArray={dataArray} />
-        </div>
+        <PersonForm onSubmit={handleSubmit} />
+        <PersonCardsField dataArray={dataArray} />
       </div>
     </div>
   );
