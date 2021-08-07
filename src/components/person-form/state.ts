@@ -1,4 +1,5 @@
 import { LANGUAGE_MAP } from 'shared/data/language-map';
+import { getUUIDv4 } from 'shared/random/uuid';
 import {
   VALIDATE_AGREEMENT,
   VALIDATE_DATE,
@@ -39,24 +40,18 @@ export type PersonFormData = PersonFormDataClean & {
   id: string;
 };
 
-export function stateToData({
-  firstName,
-  lastName,
-  email,
-  gender,
-  birthdate,
-  language,
-  agreement,
-}: PersonFormState): PersonFormData {
+export function mapStateToData(
+  personFormState: PersonFormState
+): PersonFormData {
   return {
     id: getUUIDv4(),
-    firstName: firstName.value,
-    lastName: lastName.value,
-    email: email.value,
-    gender: gender.value,
-    birthdate: birthdate.value,
-    language: language.value,
-    agreement: agreement.value,
+    ...(Object.entries(personFormState).reduce<Record<string, unknown>>(
+      (acc, [key, state]) => {
+        acc[key] = state.value;
+        return acc;
+      },
+      {}
+    ) as PersonFormDataClean),
   };
 }
 
