@@ -66,6 +66,15 @@ export const LANGUAGE: SelectStaticProps = {
   data: LANGUAGE_MAP,
 };
 
+const REACTION_VALUES = ['🙂', '😐', '🙁'];
+
+export const REACTION: RadioSwitcherStaticProps = {
+  id: 'reaction',
+  label: 'Reaction:',
+  values: REACTION_VALUES,
+  required: true,
+};
+
 export const AGREEMENT: InputStaticProps = {
   id: 'agreement',
   label: 'I agree to submit:',
