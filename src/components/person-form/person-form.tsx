@@ -44,6 +44,7 @@ export const PersonForm: React.FC<PersonFormProps> = ({ onSubmit }) => {
     event.preventDefault();
     if (!isValid(personFormState)) return;
     onSubmit?.(stateToData(personFormState));
+    handleReset();
   };
 
   function handleInput<K extends keyof PersonFormState>(key: K) {
