@@ -23,6 +23,7 @@ export const PersonCard: React.FC<PersonCardProps> = ({ data }) => {
         term="Coding language"
         description={LANGUAGE_MAP.get(data.language) || 'unknown'}
       />
+      <PersonCardItem term="Reaction" description={data.reaction} />
     </dl>
   );
 };
