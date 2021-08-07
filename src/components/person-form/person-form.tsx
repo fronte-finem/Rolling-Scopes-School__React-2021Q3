@@ -4,6 +4,7 @@ import { InputDate } from 'components/input/date';
 import { Select } from 'components/input/select';
 import { Checkbox } from 'components/input/checkbox';
 import { Switcher } from 'components/input/switcher';
+import { RadioSwitcher } from 'components/input/radio-switcher';
 import btnClasses from 'components/button/button.module.css';
 import classes from './person-form.module.css';
 import {
@@ -14,6 +15,7 @@ import {
   GENDER,
   LANGUAGE,
   LAST_NAME,
+  REACTION,
 } from './static-props';
 import {
   InferInputStateGenericType,
@@ -22,7 +24,7 @@ import {
   isValid,
   PersonFormData,
   PersonFormState,
-  stateToData,
+  mapStateToData,
   validate,
 } from './state';
 import { dateToString } from './validation';
@@ -43,7 +45,7 @@ export const PersonForm: React.FC<PersonFormProps> = ({ onSubmit }) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!isValid(personFormState)) return;
-    onSubmit?.(stateToData(personFormState));
+    onSubmit?.(mapStateToData(personFormState));
     handleReset();
   };
 
@@ -111,6 +113,14 @@ export const PersonForm: React.FC<PersonFormProps> = ({ onSubmit }) => {
           onInvalid={handleInvalid('language')}
           value={personFormState.language.value}
           isError={personFormState.language.isError}
+        />
+
+        <RadioSwitcher
+          {...REACTION}
+          onChange={handleInput('reaction')}
+          onInvalid={handleInvalid('reaction')}
+          value={personFormState.reaction.value}
+          isError={personFormState.reaction.isError}
         />
 
         <Checkbox
