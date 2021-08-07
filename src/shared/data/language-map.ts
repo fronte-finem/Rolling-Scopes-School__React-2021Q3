@@ -27,4 +27,6 @@ export const LANGUAGE_MAP: Map<string, string> = new Map([
   ['fs', 'F#'],
   ['scala', 'Scala'],
   ['hs', 'Haskell'],
+  ['other', 'Other...'],
+  ['no', 'No one!'],
 ]);
