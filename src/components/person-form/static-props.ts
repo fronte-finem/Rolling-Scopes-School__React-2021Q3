@@ -1,6 +1,10 @@
 import { InputStaticProps } from 'components/input/types';
 import { SwitcherStaticProps } from 'components/input/switcher';
 import { InputDateStaticProps } from 'components/input/date';
+import { SelectStaticProps } from 'components/input/select';
+import { RadioSwitcherStaticProps } from 'components/input/radio-switcher';
+import { InputTextStaticProps, InputTextType } from 'components/input/text';
+import { LANGUAGE_MAP } from 'shared/data/language-map';
 import {
   dateToString,
   MAX_DATE,
@@ -10,10 +14,9 @@ import {
   VALIDATE_EMAIL,
   VALIDATE_NAME,
 } from './validation';
-import { SelectStaticProps } from '../input/select';
-import { LANGUAGE_MAP } from '../../shared/data/language-map';
 
-export const FIRST_NAME: InputStaticProps = {
+export const FIRST_NAME: InputTextStaticProps = {
+  type: InputTextType.TEXT,
   id: 'first-name',
   label: 'First name:',
   placeholder: 'Jane',
@@ -21,7 +24,8 @@ export const FIRST_NAME: InputStaticProps = {
   errorMessage: VALIDATE_NAME.message,
 };
 
-export const LAST_NAME: InputStaticProps = {
+export const LAST_NAME: InputTextStaticProps = {
+  type: InputTextType.TEXT,
   id: 'last-name',
   label: 'Last name:',
   placeholder: 'Doe',
@@ -29,7 +33,8 @@ export const LAST_NAME: InputStaticProps = {
   errorMessage: VALIDATE_NAME.message,
 };
 
-export const EMAIL: InputStaticProps = {
+export const EMAIL: InputTextStaticProps = {
+  type: InputTextType.EMAIL,
   id: 'email',
   label: 'Email:',
   placeholder: 'jane-doe@e.mail',
@@ -56,14 +61,14 @@ export const BIRTHDATE: InputDateStaticProps = {
 
 export const LANGUAGE: SelectStaticProps = {
   id: 'language',
-  label: 'Main coding language:',
+  label: 'I ❤️ language:',
   required: true,
   data: LANGUAGE_MAP,
 };
 
 export const AGREEMENT: InputStaticProps = {
   id: 'agreement',
-  label: 'I agree to have my personal data processed:',
+  label: 'I agree to submit:',
   required: true,
   errorMessage: VALIDATE_AGREEMENT.message,
 };
