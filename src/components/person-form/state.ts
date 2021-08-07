@@ -5,8 +5,7 @@ import {
   VALIDATE_EMAIL,
   VALIDATE_NAME,
 } from './validation';
-import { GENDER } from './static-props';
-import { getUUIDv4 } from '../../shared/random/uuid';
+import { GENDER, REACTION } from './static-props';
 
 interface InputState<T> {
   value: T;
@@ -24,6 +23,7 @@ export interface PersonFormState {
   gender: InputStateX<string>;
   birthdate: InputStateX<Date | null>;
   language: InputStateX<string>;
+  reaction: InputStateX<string>;
   agreement: InputStateX<boolean>;
 }
 
@@ -100,6 +100,11 @@ export const INITIAL_PERSON_FORM_STATE: PersonFormState = {
   },
   gender: {
     value: GENDER.value1,
+    isError: false,
+    validate: () => true,
+  },
+  reaction: {
+    value: REACTION.values[1],
     isError: false,
     validate: () => true,
   },
