@@ -28,3 +28,11 @@
   gap: 10px;
   padding: 10px;
 }
+
+.success {
+  padding: 10px 20px;
+  text-align: center;
+  background: linear-gradient(90deg, #fff0, #08f, #f80, #fff0);
+  color: #fff;
+  font-size: 1.5em;
+}

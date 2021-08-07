@@ -34,29 +34,35 @@ interface PersonFormProps {
 }
 
 export const PersonForm: React.FC<PersonFormProps> = ({ onSubmit }) => {
+  const [success, setSuccess] = useState<boolean>(false);
   const [personFormState, setPersonFormState] = useState(
     INITIAL_PERSON_FORM_STATE
   );
 
   const handleReset = () => {
+    setSuccess(false);
     setPersonFormState(INITIAL_PERSON_FORM_STATE);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    setSuccess(false);
     event.preventDefault();
     if (!isValid(personFormState)) return;
     onSubmit?.(mapStateToData(personFormState));
     handleReset();
+    setSuccess(true);
   };
 
   function handleInput<K extends keyof PersonFormState>(key: K) {
     return (value: InferInputStateGenericType<PersonFormState[K]>) => {
+      setSuccess(false);
       setPersonFormState((prev) => validate(prev, key, value));
     };
   }
 
   function handleInvalid<K extends keyof PersonFormState>(key: K) {
     return () => {
+      setSuccess(false);
       setPersonFormState((prev) => invalidate(prev, key));
     };
   }
@@ -143,6 +149,10 @@ export const PersonForm: React.FC<PersonFormProps> = ({ onSubmit }) => {
           Create
         </button>
       </div>
+
+      {success ? (
+        <div className={classes.success}>Data saved successfully 😃</div>
+      ) : null}
     </form>
   );
 };
