@@ -3,6 +3,7 @@ import { defineConfig } from 'vite';
 import reactRefresh from '@vitejs/plugin-react-refresh';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import viteImagemin from 'vite-plugin-imagemin';
+import viteGraphlQl from 'vite2-graphql-plugin';
 import eslint from '@rollup/plugin-eslint';
 
 export const OUT_DIR = 'dist/react-forms';
@@ -54,6 +55,7 @@ export default defineConfig(({ command, mode }) => {
         }),
         enforce: 'pre',
       },
+      viteGraphlQl(),
       tsconfigPaths(),
       reactRefresh(),
       viteImagemin({
