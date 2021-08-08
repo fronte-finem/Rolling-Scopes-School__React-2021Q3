@@ -1,0 +1,15 @@
+{
+  "name": "Remote AniList Schema",
+  "schemaPath": "./anilist-api-schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "Remote AniList GraphQL Endpoint": {
+        "url": "https://graphql.anilist.co",
+        "headers": {
+          "user-agent": "JS GraphQL"
+        },
+        "introspect": true
+      }
+    }
+  }
+}
