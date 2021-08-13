@@ -1,0 +1,30 @@
+.form {
+  display: flex;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.input {
+  width: 80px;
+  border: none;
+  border-radius: 0;
+  padding: 5px 10px;
+  outline: none;
+}
+
+.submit {
+  padding: 5px 10px;
+  border: none;
+  background-color: #0008;
+  color: #fff;
+  cursor: pointer;
+  transition: all 200ms;
+
+  &:hover {
+    background-color: #000a;
+  }
+  &:disabled {
+    background-color: #0004;
+    cursor: default;
+  }
+}
