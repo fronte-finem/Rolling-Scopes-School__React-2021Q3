@@ -1,0 +1,67 @@
+query Search($page: Int = 1, $perPage: Int = 5, $type: MediaType = ANIME, $search: String, $sort: [MediaSort]) {
+  Page(page: $page, perPage: $perPage) {
+    pageInfo {
+      ...pageInfo
+    }
+    media(type: $type, search: $search, sort: $sort) {
+      ...media
+    }
+  }
+}
+
+fragment pageInfo on PageInfo {
+  total
+  currentPage
+  lastPage
+  perPage
+  hasNextPage
+}
+
+fragment media on Media {
+  id
+  title {
+    ...title
+  }
+  format
+  status(version: 2)
+  countryOfOrigin
+  popularity
+  averageScore
+  meanScore
+  startDate {
+    ...date
+  }
+  endDate {
+    ...date
+  }
+  isAdult
+  genres
+  duration
+  episodes
+  chapters
+  coverImage {
+    ...coverImage
+  }
+  studios {
+    nodes {
+      id
+      name
+    }
+  }
+}
+
+fragment title on MediaTitle {
+  english
+  romaji
+  native
+}
+
+fragment coverImage on MediaCoverImage {
+  large
+  color
+}
+
+
+fragment date on FuzzyDate {
+  year
+}
