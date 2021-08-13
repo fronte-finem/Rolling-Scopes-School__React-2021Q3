@@ -1,0 +1,22 @@
+hooks:
+  afterAllFileWrite:
+    - prettier --write
+generates:
+  ./src/services/anilist-api/generated/types.ts:
+#    schema: https://graphql.anilist.co
+    schema: ./src/services/anilist-api/generated/schema.graphql
+    documents: ./src/services/anilist-api/queries/**/*.graphql
+    plugins:
+      - typescript
+      - typescript-operations
+    config:
+      maybeValue: T | null | undefined
+      onlyOperationTypes: true
+      skipTypename: true
+#      immutableTypes: true
+      declarationKind: 'interface'
+      inlineFragmentTypes: 'combine'
+#      flattenGeneratedTypes: true
+#      exportFragmentSpreadSubTypes: true
+#      experimentalFragmentVariables: true
+#      dedupeFragments: true

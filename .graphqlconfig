@@ -1,6 +1,6 @@
 {
   "name": "Remote AniList Schema",
-  "schemaPath": "./anilist-api-schema.graphql",
+  "schemaPath": "./src/services/anilist-api/generated/schema.graphql",
   "extensions": {
     "endpoints": {
       "Remote AniList GraphQL Endpoint": {
