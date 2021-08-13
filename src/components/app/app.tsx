@@ -28,6 +28,7 @@ export function App() {
   const [variables, setVariables] = useState<SearchQueryVariables>({
     page: 1,
     perPage: 10,
+    sort: [],
   });
 
   const api = useAnilistApi<SearchQuery, SearchQueryVariables>(
