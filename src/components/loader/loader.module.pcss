@@ -1,0 +1,37 @@
+.loader {
+  --size: 100px;
+  width: var(--size);
+  height: var(--size);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 3%;
+}
+
+.cell {
+  border-radius: 50%;
+  background: #08f;
+  animation: blink 1s linear infinite;
+
+  &:nth-child(5n + 1) {
+    animation-delay: 0s;
+  }
+  &:nth-child(5n + 2) {
+    animation-delay: -0.2s;
+  }
+  &:nth-child(5n + 3) {
+    animation-delay: -0.4s;
+  }
+  &:nth-child(5n + 4) {
+    animation-delay: -0.6s;
+  }
+  &:nth-child(5n) {
+    animation-delay: -0.8s;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.5;
+  }
+}
