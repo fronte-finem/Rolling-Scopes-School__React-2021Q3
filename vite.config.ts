@@ -6,7 +6,7 @@ import viteImagemin from 'vite-plugin-imagemin';
 import viteGraphlQl from 'vite2-graphql-plugin';
 import eslint from '@rollup/plugin-eslint';
 
-export const OUT_DIR = 'dist/react-forms';
+export const OUT_DIR = 'dist/react-api';
 export const LOCAL_MODE = 'localmode';
 export const LOCAL_OUT_DIR = resolve('r:', OUT_DIR);
 
