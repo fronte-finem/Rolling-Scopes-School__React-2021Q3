@@ -30,6 +30,10 @@ export default defineConfig(({ command, mode }) => {
       },
     },
 
+    server: {
+      force: true,
+    },
+
     build: {
       outDir: isLocalMode ? LOCAL_OUT_DIR : OUT_DIR,
       emptyOutDir: true,
