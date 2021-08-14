@@ -1,5 +1,5 @@
 {
-  "name": "react-api",
+  "name": "react-routing",
   "private": true,
   "scripts": {
     "dev": "vite",
