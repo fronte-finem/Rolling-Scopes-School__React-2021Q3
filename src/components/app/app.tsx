@@ -5,6 +5,7 @@ import {
 } from 'services/anilist-api/use-anilist-api';
 import searchQuery from 'services/anilist-api/queries/search-query.graphql';
 import {
+  MediaSort,
   SearchQuery,
   SearchQueryVariables,
 } from 'services/anilist-api/generated/types';
@@ -13,11 +14,6 @@ import { ErrorInfo } from 'components/error-info/error-info';
 import { Cards } from 'components/cards/cards';
 import { SearchBar } from 'components/search-bar/search-bar';
 import { OrderByGroup } from 'components/order-by/order-by-group';
-import { OrderMap } from 'components/order-by/order-state';
-import {
-  mapOrderSort,
-  ORDER_SORT_MAP,
-} from 'components/order-by/order-to-sort';
 import { FullLoader } from 'components/loader/full-loader';
 import classes from './app.module.css';
 
@@ -62,8 +58,7 @@ export function App() {
     setVariables((prev) => ({ ...prev, page: 1, search: search || undefined }));
   };
 
-  const handleOrderBy = (orders: OrderMap) => {
-    const sort = mapOrderSort(orders);
+  const handleOrderBy = (sort?: MediaSort) => {
     console.log('Order by:', sort);
     setVariables((prev) => ({ ...prev, page: 1, sort }));
   };
@@ -71,12 +66,7 @@ export function App() {
   const SearchWrapper = (
     <div className={classes.searchWrapper}>
       <SearchBar onSubmit={handleSubmit} />
-      {isResults(api) && (
-        <OrderByGroup
-          names={[...ORDER_SORT_MAP.keys()]}
-          onChange={handleOrderBy}
-        />
-      )}
+      {isResults(api) && <OrderByGroup onChange={handleOrderBy} />}
       {api.isLoading && <FullLoader />}
     </div>
   );

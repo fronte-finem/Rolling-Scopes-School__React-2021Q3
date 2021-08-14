@@ -1,32 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { initOrders, OrderMap, OrderState } from './order-state';
+import React, { useState } from 'react';
+import { MediaSort } from 'services/anilist-api/generated/types';
+import { getConfig, INIT_ORDER_STATES, OrdersConfig } from './orders-config';
 import { OrderBy } from './order-by';
 import classes from './order-by-group.module.pcss';
 
 interface OrderByGroupProps {
-  names: string[];
-  onChange: (orders: OrderMap) => void;
+  onChange: (mediaSort?: MediaSort) => void;
 }
 
-export const OrderByGroup: React.FC<OrderByGroupProps> = ({
-  names,
-  onChange,
-}) => {
-  const [orders, setOrders] = useState<OrderMap>(initOrders(names));
+export const OrderByGroup: React.FC<OrderByGroupProps> = ({ onChange }) => {
+  const [config, setOrders] = useState<OrdersConfig>(
+    getConfig(INIT_ORDER_STATES)
+  );
 
-  const handleChange = (name: string, order: OrderState) => {
-    setOrders(() => ({ ...initOrders(names), [name]: order }));
+  const handleChange = (name: string) => {
+    setOrders((prev) => {
+      const order = prev[name]?.next();
+      if (!order) return prev;
+      onChange(order.toSort());
+      return { ...getConfig(INIT_ORDER_STATES), [name]: order };
+    });
   };
-
-  useEffect(() => {
-    onChange(orders);
-  }, [orders]);
 
   return (
     <ul className={classes.group}>
-      {names.map((name) => (
-        <li key={name}>
-          <OrderBy name={name} value={orders[name]} onChange={handleChange} />
+      {Object.values(config).map((order) => (
+        <li key={order.name}>
+          <OrderBy order={order} onChange={handleChange} />
         </li>
       ))}
     </ul>
