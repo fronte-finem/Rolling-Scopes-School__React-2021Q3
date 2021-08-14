@@ -1,25 +1,61 @@
-export enum OrderState {
+import { MediaSort } from 'services/anilist-api/generated/types';
+
+export enum Order {
   NONE = 'none',
   ASC = 'asc',
   DESC = 'desc',
 }
 
-export type OrderMap = { [keys: string]: OrderState };
-
-export function nextOrder(order: OrderState): OrderState {
-  switch (order) {
-    case OrderState.NONE:
-      return OrderState.DESC;
-    case OrderState.DESC:
-      return OrderState.ASC;
-    case OrderState.ASC:
-      return OrderState.NONE;
-  }
+export interface IOrderState {
+  readonly name: string;
+  readonly state: Order;
+  readonly reverse: boolean;
+  readonly map: OrderToSort;
 }
 
-export const initOrders = (keys: string[]): OrderMap => {
-  return keys.reduce((acc, key) => {
-    acc[key] = OrderState.NONE;
-    return acc;
-  }, {} as OrderMap);
-};
+export type OrderToSort = Record<Order, MediaSort | undefined>;
+
+export class OrderState implements IOrderState {
+  public readonly name: string;
+  public readonly state: Order;
+  public readonly reverse: boolean;
+  public readonly map: OrderToSort;
+
+  constructor({ name, state, reverse, map }: IOrderState) {
+    this.name = name;
+    this.state = state;
+    this.reverse = reverse;
+    this.map = map;
+  }
+
+  public reset(): OrderState {
+    return new OrderState({
+      ...this,
+      state: Order.NONE,
+    });
+  }
+
+  public next(): OrderState {
+    switch (this.state) {
+      case Order.NONE:
+        return new OrderState({
+          ...this,
+          state: this.reverse ? Order.DESC : Order.ASC,
+        });
+      case Order.ASC:
+        return new OrderState({
+          ...this,
+          state: this.reverse ? Order.NONE : Order.DESC,
+        });
+      case Order.DESC:
+        return new OrderState({
+          ...this,
+          state: this.reverse ? Order.ASC : Order.NONE,
+        });
+    }
+  }
+
+  public toSort(): MediaSort | undefined {
+    return this.map[this.state];
+  }
+}
