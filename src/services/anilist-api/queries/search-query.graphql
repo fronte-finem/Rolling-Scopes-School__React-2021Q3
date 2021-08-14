@@ -1,4 +1,4 @@
-query Search($page: Int = 1, $perPage: Int = 5, $type: MediaType = ANIME, $search: String, $sort: [MediaSort]) {
+query Search($page: Int = 1, $perPage: Int = 5, $type: MediaType, $search: String, $sort: [MediaSort]) {
   Page(page: $page, perPage: $perPage) {
     pageInfo {
       ...pageInfo
