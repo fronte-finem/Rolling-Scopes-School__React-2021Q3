@@ -1,29 +1,28 @@
 import React from 'react';
 import icons from 'assets/sprites/icons.svg';
 import { withSprite } from 'components/svg/svg';
-import { nextOrder, OrderState } from './order-state';
+import { Order, OrderState } from './order-state';
 import classes from './order-by.module.pcss';
 
 const Icon = withSprite(icons);
 
 interface OrderByProps {
-  name: string;
-  value: OrderState;
-  onChange: (name: string, state: OrderState) => void;
+  order: OrderState;
+  onChange: (name: string) => void;
 }
 
-export const OrderBy: React.FC<OrderByProps> = ({ name, value, onChange }) => {
-  const asc = value === OrderState.ASC ? classes.iconActive : '';
-  const desc = value === OrderState.DESC ? classes.iconActive : '';
+export const OrderBy: React.FC<OrderByProps> = ({ order, onChange }) => {
+  const asc = order.state === Order.ASC ? classes.iconActive : '';
+  const desc = order.state === Order.DESC ? classes.iconActive : '';
 
   const handleClick = () => {
-    onChange(name, nextOrder(value));
+    onChange(order.name);
   };
 
   return (
     <div>
       <button className={classes.button} type="button" onClick={handleClick}>
-        {name}
+        {order.name}
         <div className={classes.order}>
           <div className={`${classes.icon} ${asc}`}>
             <Icon name="caret-up" />
