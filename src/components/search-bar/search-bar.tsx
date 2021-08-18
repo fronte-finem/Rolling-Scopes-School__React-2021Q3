@@ -23,13 +23,13 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
       <form onSubmit={handleSubmit}>
         <div className={classes.search}>
           <input
-            className={classes.search__input}
+            className={classes.searchInput}
             type="text"
             value={search}
             placeholder="hero"
             onInput={handleSearch}
           />
-          <button className={classes.search__button} type="submit">
+          <button className={classes.searchButton} type="submit">
             search
           </button>
         </div>
