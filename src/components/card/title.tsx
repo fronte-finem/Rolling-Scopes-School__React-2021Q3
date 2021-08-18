@@ -1,17 +1,11 @@
 import React from 'react';
-import {
-  MediaFragment,
-  TitleFragment,
-} from 'services/anilist-api/generated/types';
+import { TitleFragment } from 'services/anilist-api/generated/search-query-types';
 import classes from './title.module.pcss';
-import { Info } from './info';
+import { Info } from '../info/info';
+import { MediaProps } from './types';
 
 const formatTip = (title: TitleFragment) =>
   `${title.romaji || ''}\n${title.english || ''}\n${title.native || ''}`;
-
-interface MediaProps {
-  media: MediaFragment;
-}
 
 export const Title: React.FC<MediaProps> = ({ media }) => {
   if (!media.title) return <></>;

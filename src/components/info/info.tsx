@@ -1,9 +1,6 @@
 import React from 'react';
-import { withSprite } from 'components/svg/svg';
-import iconsSprite from 'assets/sprites/icons.svg';
+import { Icon } from 'components/svg/sprites';
 import classes from './info.module.pcss';
-
-const Icons = withSprite(iconsSprite);
 
 interface InfoProps {
   info: number | string;
@@ -15,7 +12,7 @@ export const Info: React.FC<InfoProps> = ({ info, icon }) => {
   return (
     <div className={classes.info}>
       <div className={classes.icon}>
-        <Icons name={icon} />
+        <Icon name={icon} />
       </div>
       <div>{text}</div>
     </div>

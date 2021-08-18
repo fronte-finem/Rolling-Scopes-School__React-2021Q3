@@ -1,19 +1,24 @@
 import React, { CSSProperties } from 'react';
-import { MediaFragment } from 'services/anilist-api/generated/types';
+import { useHistory } from 'react-router-dom';
+import { Format } from 'components/format/format';
 import classes from './card.module.pcss';
-import { Genres } from './genres';
-import { Format } from './format';
+import { Genres } from '../genres/genres';
 import { Cover } from './cover';
 import { Title } from './title';
-import { Info } from './info';
-
-interface MediaProps {
-  media: MediaFragment;
-}
+import { MediaProps } from './types';
+import { Stats } from '../stats/stats';
 
 export const Card: React.FC<MediaProps> = ({ media }) => {
+  const history = useHistory();
+
+  const handleClick = () => {
+    history.push(`/details/${media.id}`);
+  };
+
   return (
     <div
+      role="link"
+      tabIndex={0}
       className={classes.card}
       style={
         {
@@ -22,22 +27,17 @@ export const Card: React.FC<MediaProps> = ({ media }) => {
             (media.coverImage?.large && `url(${media.coverImage?.large})`) ||
             'unset',
         } as CSSProperties
-      }>
+      }
+      onClick={handleClick}
+      onKeyDown={handleClick}>
       <Cover media={media} />
       <div className={classes.container}>
         <Title media={media} />
-        <Format media={media} />
-        {media.genres && (
-          <div className={classes.genres}>
-            <Genres genres={media.genres} />
-          </div>
-        )}
-        <div className={classes.stats}>
-          {media.averageScore && (
-            <Info info={media.averageScore / 10} icon="star" />
-          )}
-          {media.popularity && <Info info={media.popularity} icon="people" />}
+        <Format short data={media} className={classes.format} />
+        <div className={classes.genres}>
+          <Genres genres={media.genres} />
         </div>
+        <Stats mediaStats={media} />
       </div>
     </div>
   );

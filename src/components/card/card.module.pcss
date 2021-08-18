@@ -19,6 +19,13 @@
   background-color: #fff;
   box-shadow: 0 0 1px 1px #0004;
 
+  cursor: pointer;
+  transition: all 200ms;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
   &::before {
     content: '';
     position: absolute;
@@ -51,12 +58,10 @@
   margin-top: auto;
 }
 
-.stats {
-  --color: #111;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 5px 10px;
-  color: var(--color);
-  fill: var(--color);
+.format {
+  padding: 10px;
+  text-align: center;
+  color: #111;
+  font-weight: bold;
+  font-size: 0.8em;
 }
