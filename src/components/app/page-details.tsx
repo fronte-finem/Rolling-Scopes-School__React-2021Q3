@@ -7,10 +7,10 @@ import {
   DetailsQueryVariables,
 } from 'services/anilist-api/generated/details-query-types';
 import { FullLoader } from 'components/loader/full-loader';
+import { ErrorInfo } from 'components/error-info/error-info';
+import { Media } from 'components/media/media';
 import { updateTitle } from 'shared/update-title';
 import classes from './page-details.module.pcss';
-import { ErrorInfo } from '../error-info/error-info';
-import { Media } from '../media/media';
 
 export function PageDetails() {
   const { id } = useParams<{ id: string }>();
