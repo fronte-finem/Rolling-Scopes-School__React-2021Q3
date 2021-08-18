@@ -22,12 +22,9 @@ export default defineConfig(({ command, mode }) => {
 
     css: {
       modules: {
-        localsConvention: 'camelCase',
+        localsConvention: 'camelCaseOnly',
       },
-      postcss: {
-        map: { inline: false },
-        plugins: [require('postcss-nested')],
-      },
+      postcss: './postcss.config.js',
     },
 
     server: {

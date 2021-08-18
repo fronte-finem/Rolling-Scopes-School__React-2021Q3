@@ -1,3 +1,13 @@
+const autoprefixer = require('autoprefixer');
+
 module.exports = {
-  plugins: [require('postcss-nested')],
+  modules: {
+    localsConvention: 'camelCaseOnly',
+  },
+  plugins: [
+    require('postcss-nested'),
+    autoprefixer({
+      flexbox: false,
+    }),
+  ],
 };
