@@ -1,0 +1,50 @@
+.content {
+  min-height: 100%;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+
+  &-animation {
+    position: relative;
+    overflow: hidden;
+  }
+}
+
+.animated-page {
+  min-height: 100%;
+  width: 100%;
+  background: linear-gradient(to right, #bbb, #444);
+}
+
+.enter,
+.exit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.enter-active,
+.exit-active {
+  transition: all 500ms ease-out;
+}
+
+.enter {
+  z-index: 1;
+  opacity: 0;
+  transform: scale(0);
+}
+.enter-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.exit {
+  opacity: 1;
+}
+.exit-active {
+  opacity: 1;
+}
