@@ -1,4 +1,4 @@
-import { PageInfoFragment } from 'services/anilist-api/generated/types';
+import { PageInfoFragment } from 'services/anilist-api/generated/search-query-types';
 
 export interface PageInfoProps {
   pageInfo: PageInfoFragment;
