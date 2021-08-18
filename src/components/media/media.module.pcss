@@ -1,0 +1,51 @@
+.media {
+  --main-c: #fff;
+  --top-offset: 20px;
+
+  position: relative;
+  width: 100%;
+  background-color: var(--main-c, #fff);
+}
+
+.content {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  display: grid;
+  grid-template-areas:
+    "head cover"
+    "body body";
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: min-content;
+  grid-gap: 20px;
+  padding: var(--top-offset, 20px) 20px 20px;
+
+  @media (max-width: 800px) {
+    grid-template-areas:
+    "head"
+    "cover"
+    "body";
+    grid-template-columns: 1fr;
+  }
+}
+
+.cover {
+  grid-area: cover;
+
+  @media (max-width: 800px) {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.header {
+  grid-area: head;
+}
+
+.body {
+  grid-area: body;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
