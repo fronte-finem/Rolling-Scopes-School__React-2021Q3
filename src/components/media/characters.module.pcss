@@ -1,0 +1,57 @@
+.characters {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+.card {
+  position: relative;
+  width: 150px;
+  height: 250px;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  &__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+.content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 5px;
+  color: #fff;
+  background: linear-gradient(to top, #000e, #0008);
+  backdrop-filter: blur(5px);
+
+  &__more {
+    display: flex;
+    gap: 10px;
+  }
+}
