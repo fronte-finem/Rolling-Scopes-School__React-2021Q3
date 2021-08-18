@@ -1,0 +1,35 @@
+.page-about {
+  min-height: 100%;
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+
+  background: linear-gradient(to right, #0a4, #4a0);
+  color: #111;
+}
+
+.title {
+  text-align: center;
+  font-size: 50px;
+  color: #8f8;
+}
+
+.task {
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  font-size: 20px;
+
+  & ol > li {
+    padding-bottom: 20px;
+  }
+  & ul {
+    padding-top: 10px;
+  }
+  & ul > li {
+    padding-bottom: 10px;
+  }
+}
