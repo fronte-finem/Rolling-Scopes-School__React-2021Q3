@@ -1,0 +1,65 @@
+query Details($id: Int) {
+    Media(id: $id) {
+      ...media
+    }
+}
+
+fragment media on Media {
+  id
+  title { ...title }
+  description
+  format
+  source(version: 2)
+  status(version: 2)
+  countryOfOrigin
+  popularity
+  averageScore
+  meanScore
+  startDate { year }
+  endDate { year }
+  seasonYear
+  isAdult
+  genres
+  duration
+  episodes
+  chapters
+  volumes
+  bannerImage
+  coverImage { ...cover }
+  trailer { ...trailer }
+  characters(sort: [ROLE, FAVOURITES_DESC]) { nodes { ...character } }
+  studios(isMain: true) { nodes { name } }
+  externalLinks { ...externalLinks }
+}
+
+fragment title on MediaTitle {
+  english
+  romaji
+  native
+}
+
+fragment cover on MediaCoverImage {
+  large
+  extraLarge
+  color
+}
+
+fragment trailer on MediaTrailer {
+  id
+  site
+  thumbnail
+}
+
+fragment externalLinks on MediaExternalLink {
+  id
+  site
+  url
+}
+
+fragment character on Character {
+  id
+  name { full }
+  gender
+  age
+  image { medium, large }
+}
