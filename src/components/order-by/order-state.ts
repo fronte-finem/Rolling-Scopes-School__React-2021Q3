@@ -1,4 +1,4 @@
-import { MediaSort } from 'services/anilist-api/generated/types';
+import { MediaSort } from 'services/anilist-api/generated/schema-types';
 
 export enum Order {
   NONE = 'none',

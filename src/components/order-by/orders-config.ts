@@ -1,4 +1,4 @@
-import { MediaSort } from 'services/anilist-api/generated/types';
+import { MediaSort } from 'services/anilist-api/generated/schema-types';
 import { IOrderState, Order, OrderState } from './order-state';
 
 export type OrdersConfig = Record<string, OrderState>;

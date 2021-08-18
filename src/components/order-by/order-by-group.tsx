@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MediaSort } from 'services/anilist-api/generated/types';
+import { MediaSort } from 'services/anilist-api/generated/schema-types';
 import { getConfig, INIT_ORDER_STATES, OrdersConfig } from './orders-config';
 import { OrderBy } from './order-by';
 import classes from './order-by-group.module.pcss';
