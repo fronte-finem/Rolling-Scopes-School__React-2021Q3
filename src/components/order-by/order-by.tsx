@@ -1,10 +1,7 @@
 import React from 'react';
-import icons from 'assets/sprites/icons.svg';
-import { withSprite } from 'components/svg/svg';
+import { Icon } from 'components/svg/sprites';
 import { Order, OrderState } from './order-state';
 import classes from './order-by.module.pcss';
-
-const Icon = withSprite(icons);
 
 interface OrderByProps {
   order: OrderState;
