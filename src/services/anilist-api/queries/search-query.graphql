@@ -28,12 +28,8 @@ fragment media on Media {
   popularity
   averageScore
   meanScore
-  startDate {
-    ...date
-  }
-  endDate {
-    ...date
-  }
+  seasonYear
+  startDate { year }
   isAdult
   genres
   duration
@@ -42,9 +38,8 @@ fragment media on Media {
   coverImage {
     ...coverImage
   }
-  studios {
+  studios(isMain: true) {
     nodes {
-      id
       name
     }
   }
@@ -59,9 +54,4 @@ fragment title on MediaTitle {
 fragment coverImage on MediaCoverImage {
   large
   color
-}
-
-
-fragment date on FuzzyDate {
-  year
 }
