@@ -18,6 +18,6 @@
 
 [[redirects]]
   from = "/react-routing/*"
-  to = "/react-routing/index.html"
+  to = "/react-routing/"
   status = 200
   force = false
