@@ -16,9 +16,10 @@ const ENV_PUBLIC_URL = '/react-routing';
 
 export default defineConfig(({ command, mode }) => {
   const isLocalMode = mode === LOCAL_MODE;
+  const isProd = command === 'build';
 
   return {
-    base: `/`,
+    base: isProd ? `${ENV_PUBLIC_URL}/` : '/',
 
     define: {
       ENV_PUBLIC_URL: JSON.stringify(ENV_PUBLIC_URL),
