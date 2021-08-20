@@ -1,15 +1,15 @@
 query Search($page: Int = 1, $perPage: Int = 5, $type: MediaType, $search: String, $sort: [MediaSort]) {
   Page(page: $page, perPage: $perPage) {
     pageInfo {
-      ...pageInfo
+      ...PageInfo
     }
     media(type: $type, search: $search, sort: $sort) {
-      ...media
+      ...Media
     }
   }
 }
 
-fragment pageInfo on PageInfo {
+fragment PageInfo on PageInfo {
   total
   currentPage
   lastPage
@@ -17,7 +17,7 @@ fragment pageInfo on PageInfo {
   hasNextPage
 }
 
-fragment media on Media {
+fragment Media on Media {
   id
   title {
     ...title
