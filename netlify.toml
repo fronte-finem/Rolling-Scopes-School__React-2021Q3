@@ -20,4 +20,4 @@
   from = "/react-routing/*"
   to = "/react-routing"
   status = 200
-  force = true
+  force = false
