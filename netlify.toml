@@ -15,3 +15,9 @@
 
 [context.react-components] # “react-components” is a branch name
   command = "npm run prod"
+
+[[redirects]]
+  from = "/react-routing/*"
+  to = "/react-routing"
+  status = 200
+  force = true
