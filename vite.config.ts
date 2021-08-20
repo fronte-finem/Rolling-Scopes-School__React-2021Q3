@@ -10,13 +10,19 @@ export const OUT_DIR = 'dist/react-routing';
 export const LOCAL_MODE = 'localmode';
 export const LOCAL_OUT_DIR = resolve('r:', OUT_DIR);
 
+const ENV_PUBLIC_URL = '/react-routing';
+
 // https://vitejs.dev/config/
 
 export default defineConfig(({ command, mode }) => {
   const isLocalMode = mode === LOCAL_MODE;
 
   return {
-    base: './',
+    base: `/`,
+
+    define: {
+      ENV_PUBLIC_URL: JSON.stringify(ENV_PUBLIC_URL),
+    },
 
     clearScreen: false,
 
