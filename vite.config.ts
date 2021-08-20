@@ -10,7 +10,7 @@ export const OUT_DIR = 'dist/react-routing';
 export const LOCAL_MODE = 'localmode';
 export const LOCAL_OUT_DIR = resolve('r:', OUT_DIR);
 
-export const ENV_PUBLIC_URL = '/react-routing';
+const ENV_PUBLIC_URL = '/react-redux';
 
 // https://vitejs.dev/config/
 
@@ -22,7 +22,7 @@ export default defineConfig(({ command, mode }) => {
     base: isProd ? `${ENV_PUBLIC_URL}/` : '/',
 
     define: {
-      ENV_PUBLIC_URL: JSON.stringify(ENV_PUBLIC_URL),
+      ENV_PUBLIC_URL: JSON.stringify(isProd ? ENV_PUBLIC_URL : '/'),
     },
 
     clearScreen: false,
