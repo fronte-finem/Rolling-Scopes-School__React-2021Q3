@@ -4,7 +4,7 @@ import { PUBLIC_URL } from 'env';
 import classes from './app.module.pcss';
 import { routesConfig } from './routes-config';
 import { Nav } from './nav';
-import { Content } from './content';
+import { Main } from './main';
 
 export function App() {
   return (
@@ -14,7 +14,7 @@ export function App() {
           <Nav config={routesConfig} />
         </header>
         <main className={classes.main}>
-          <Content config={routesConfig} />
+          <Main config={routesConfig} />
         </main>
       </BrowserRouter>
     </div>
