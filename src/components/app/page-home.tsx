@@ -7,17 +7,15 @@ import { Cards } from 'components/cards/cards';
 import { SearchBar } from 'components/search-bar/search-bar';
 import { OrderByGroup } from 'components/order-by/order-by-group';
 import { FullLoader } from 'components/loader/full-loader';
-import { useAppDispatch, useAppSelector } from 'store/hooks/hooks';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
 import {
-  searchFetch,
   setPage,
   setPerPage,
   setSearch,
   setSort,
-  setUnmount,
-} from 'store/slices/searchSlice';
+} from 'store/slices/search-vars';
 import { Maybe } from 'shared/maybe';
-import { selectSearch } from 'store/selectors/search';
+import { useSearchQuery } from 'services/anilist-api/anilist-api';
 import classes from './page-home.module.pcss';
 
 const isResults = (data: Maybe<SearchQuery>): boolean =>
@@ -25,27 +23,8 @@ const isResults = (data: Maybe<SearchQuery>): boolean =>
 
 export function PageHome() {
   const dispatch = useAppDispatch();
-  const searchApi = useAppSelector((state) => state.search);
-  const { page, perPage, search, sort } = useAppSelector(selectSearch);
-
-  React.useEffect(() => {
-    return () => {
-      dispatch(setUnmount(true));
-    };
-  }, []);
-
-  React.useEffect(() => {
-    const { isUnmount } = searchApi;
-    if (isUnmount) dispatch(setUnmount(false));
-    if ((isUnmount && searchApi.data) || searchApi.isLoading) return () => {};
-
-    const promise = dispatch(searchFetch({ page, perPage, search, sort }));
-
-    return () => {
-      console.log('abort searchApi.fetch');
-      promise.abort();
-    };
-  }, [page, perPage, search, sort]);
+  const searchVars = useAppSelector((state) => state.searchVars);
+  const { isLoading, data, isError, error } = useSearchQuery(searchVars);
 
   const handlePageSelect = (num: number) => {
     console.log('Selected page:', num);
@@ -57,14 +36,14 @@ export function PageHome() {
     dispatch(setPerPage(num));
   };
 
-  const PaginatorWrapper = searchApi.data?.Page?.pageInfo && (
+  const PaginatorWrapper = data?.Page?.pageInfo && (
     <div className={classes.paginatorWrapper}>
       <Paginator
-        pageInfo={searchApi.data.Page.pageInfo}
+        pageInfo={data.Page.pageInfo}
         onPageSelect={handlePageSelect}
         onPerPageSelect={handlePerPageSelect}
       />
-      {searchApi.isLoading && <FullLoader />}
+      {isLoading && <FullLoader />}
     </div>
   );
 
@@ -81,8 +60,8 @@ export function PageHome() {
   const SearchWrapper = (
     <div className={classes.searchWrapper}>
       <SearchBar onSubmit={handleSubmit} />
-      {isResults(searchApi.data) && <OrderByGroup onChange={handleOrderBy} />}
-      {searchApi.isLoading && <FullLoader />}
+      {isResults(data) && <OrderByGroup onChange={handleOrderBy} />}
+      {isLoading && <FullLoader />}
     </div>
   );
 
@@ -91,17 +70,16 @@ export function PageHome() {
       {SearchWrapper}
       <div>
         <div className={classes.stateWrapper}>
-          {searchApi.isError && <ErrorInfo error={searchApi.error} />}
+          {isError && <ErrorInfo error={error} />}
         </div>
-        {!searchApi.isLoading && !isResults(searchApi.data) && (
+        {!isLoading && !isResults(data) && (
           <div className={classes.searchWrapper}>
-            （＞人＜；） No results for query: &quot;{search}&quot;
+            （＞人＜；） No results for query: &quot;{searchVars.search}
+            &quot;
           </div>
         )}
         {PaginatorWrapper}
-        {searchApi.data?.Page?.media && (
-          <Cards mediaFragments={searchApi.data.Page.media} />
-        )}
+        {data?.Page?.media && <Cards mediaFragments={data.Page.media} />}
         {PaginatorWrapper}
       </div>
     </div>
