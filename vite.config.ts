@@ -23,6 +23,7 @@ export default defineConfig(({ command, mode }) => {
 
     define: {
       ENV_PUBLIC_URL: JSON.stringify(isProd ? ENV_PUBLIC_URL : '/'),
+      ENV_IS_PROD: isProd,
     },
 
     clearScreen: false,
