@@ -11,6 +11,7 @@ export const LOCAL_MODE = 'localmode';
 export const LOCAL_OUT_DIR = resolve('r:', OUT_DIR);
 
 export const ENV_PUBLIC_URL = '/react-redux';
+export const ENV_TITLE = 'React Redux';
 
 // https://vitejs.dev/config/
 
@@ -25,6 +26,7 @@ export default defineConfig(({ command, mode }) => {
     define: {
       ENV_PUBLIC_URL: JSON.stringify(isProd ? ENV_PUBLIC_URL : '/'),
       ENV_IS_PROD: isProd,
+      ENV_TITLE: JSON.stringify(ENV_TITLE),
     },
 
     clearScreen: false,

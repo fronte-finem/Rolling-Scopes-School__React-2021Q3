@@ -1,6 +1,6 @@
 import { Maybe } from './maybe';
+import { TITLE } from 'env';
 
-const TITLE = 'React Routing';
 const TITLE_SPLITTER = ' | ';
 
 export const updateTitle = (title?: Maybe<string>) => {
