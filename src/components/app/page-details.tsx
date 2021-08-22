@@ -1,46 +1,50 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useAnilistApi } from 'services/anilist-api/use-anilist-api';
-import detailsQuery from 'services/anilist-api/queries/details-query.graphql';
-import {
-  DetailsQuery,
-  DetailsQueryVariables,
-} from 'services/anilist-api/generated/details-query-types';
 import { FullLoader } from 'components/loader/full-loader';
 import { ErrorInfo } from 'components/error-info/error-info';
 import { Media } from 'components/media/media';
 import { updateTitle } from 'shared/update-title';
+import { useAppDispatch, useAppSelector } from 'store/hooks/hooks';
+import { detailsFetch, reset, setId } from 'store/slices/detailsSlice';
 import classes from './page-details.module.pcss';
 
 export function PageDetails() {
   const { id } = useParams<{ id: string }>();
-  const vars = React.useRef<DetailsQueryVariables>({ id: +id });
-
-  const api = useAnilistApi<DetailsQuery, DetailsQueryVariables>(
-    detailsQuery,
-    vars.current
-  );
+  const dispatch = useAppDispatch();
+  const details = useAppSelector((state) => state.details);
 
   React.useEffect(() => {
-    if (api.isLoading || api.isError) return;
-    if (api.data?.Media?.title?.romaji)
-      updateTitle(api.data.Media.title.romaji);
-  }, [api.isLoading]);
+    if (+id === details.id && details.data) return () => {};
+    if (+id !== details.id) dispatch(reset());
+
+    const promise = dispatch(detailsFetch({ id: +id }));
+
+    return () => {
+      if (details.isLoading) promise.abort();
+      dispatch(setId(+id));
+    };
+  }, []);
+
+  React.useEffect(() => {
+    if (details.isLoading || details.isError) return;
+    if (details.data?.Media?.title?.romaji)
+      updateTitle(details.data.Media.title.romaji);
+  }, [details]);
 
   return (
     <div className={classes.pageDetails}>
-      {api.isLoading && <FullLoader />}
-      {api.isError && (
+      {details.isLoading && <FullLoader />}
+      {details.isError && (
         <div className={classes.errorWrapper}>
-          <ErrorInfo error={api.error} />
+          <ErrorInfo error={details.error} />
         </div>
       )}
-      {!api.isLoading && !api.data && (
+      {!details.isLoading && !details.data && (
         <div className={classes.messageWrapper}>
           （＞人＜；） No results for ID: &quot;{id}&quot;
         </div>
       )}
-      {api.data?.Media && <Media media={api.data.Media} />}
+      {details.data?.Media && <Media media={details.data.Media} />}
     </div>
   );
 }
