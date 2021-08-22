@@ -1,14 +1,29 @@
 import React from 'react';
 import { Card } from 'components/card/card';
-import { Maybe } from 'shared/maybe';
-import { MediaFragment } from 'services/anilist-api/generated/search-query-types';
+import { SearchQuery } from 'services/anilist-api/generated/search-query-types';
+import { useAppSelector } from 'store/hooks';
+import { useSearchQuery } from 'services/anilist-api/anilist-api';
 import classes from './cards.module.pcss';
 
-interface CardsProps {
-  mediaFragments: Maybe<MediaFragment>[];
-}
+const selectMedia = ({ data }: { data?: SearchQuery }) => ({
+  mediaFragments: data?.Page?.media,
+});
 
-export const Cards: React.FC<CardsProps> = ({ mediaFragments }) => {
+export const Cards: React.FC = () => {
+  const searchVars = useAppSelector((state) => state.searchVars);
+  const { mediaFragments } = useSearchQuery(searchVars, {
+    selectFromResult: selectMedia,
+  });
+
+  if (!mediaFragments || mediaFragments.length === 0) {
+    return (
+      <div className={classes.searchWrapper}>
+        （＞人＜；） No results for query: &quot;{searchVars.search}
+        &quot;
+      </div>
+    );
+  }
+
   return (
     <ul className={classes.cards}>
       {mediaFragments.map(
