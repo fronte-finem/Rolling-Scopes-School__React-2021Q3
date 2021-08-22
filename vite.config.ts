@@ -6,12 +6,14 @@ import viteImagemin from 'vite-plugin-imagemin';
 import viteGraphlQl from 'vite2-graphql-plugin';
 import eslint from '@rollup/plugin-eslint';
 
-export const OUT_DIR = 'dist/react-routing';
+const NAME = 'react-redux';
+
+export const ENV_PUBLIC_URL = `/${NAME}`;
+export const ENV_TITLE = 'React Redux';
+
+export const OUT_DIR = `dist/${NAME}`;
 export const LOCAL_MODE = 'localmode';
 export const LOCAL_OUT_DIR = resolve('r:', OUT_DIR);
-
-export const ENV_PUBLIC_URL = '/react-redux';
-export const ENV_TITLE = 'React Redux';
 
 // https://vitejs.dev/config/
 
