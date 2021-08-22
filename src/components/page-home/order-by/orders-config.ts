@@ -3,12 +3,6 @@ import { IOrderState, Order, OrderState } from './order-state';
 
 export type OrdersConfig = Record<string, OrderState>;
 
-export const getConfig = (states: IOrderState[]): OrdersConfig =>
-  states.reduce((acc, init) => {
-    acc[init.name] = new OrderState(init);
-    return acc;
-  }, {} as OrdersConfig);
-
 export const INIT_ORDER_STATES: IOrderState[] = [
   {
     name: 'Popularity',
@@ -51,3 +45,16 @@ export const INIT_ORDER_STATES: IOrderState[] = [
     },
   },
 ];
+
+type MediaSortToOrderMap = Map<MediaSort, IOrderState>;
+
+export const mediaSortToOrderMap: MediaSortToOrderMap = new Map([
+  [MediaSort.Popularity, { ...INIT_ORDER_STATES[0], state: Order.ASC }],
+  [MediaSort.PopularityDesc, { ...INIT_ORDER_STATES[0], state: Order.DESC }],
+  [MediaSort.Score, { ...INIT_ORDER_STATES[1], state: Order.ASC }],
+  [MediaSort.ScoreDesc, { ...INIT_ORDER_STATES[1], state: Order.DESC }],
+  [MediaSort.StartDate, { ...INIT_ORDER_STATES[2], state: Order.ASC }],
+  [MediaSort.StartDateDesc, { ...INIT_ORDER_STATES[2], state: Order.DESC }],
+  [MediaSort.TitleRomaji, { ...INIT_ORDER_STATES[3], state: Order.ASC }],
+  [MediaSort.TitleRomajiDesc, { ...INIT_ORDER_STATES[3], state: Order.DESC }],
+]);

@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import { MediaSort } from 'services/anilist-api/generated/schema-types';
-import { getConfig, INIT_ORDER_STATES, OrdersConfig } from './orders-config';
+import { useAppSelector } from 'store/hooks';
+import { INIT_ORDER_STATES, OrdersConfig } from './orders-config';
 import { OrderBy } from './order-by';
 import classes from './order-by-group.module.pcss';
+import { getConfig } from './get-config';
 
 interface OrderByGroupProps {
   onChange: (mediaSort?: MediaSort) => void;
 }
 
 export const OrderByGroup: React.FC<OrderByGroupProps> = ({ onChange }) => {
+  const mediaSort = useAppSelector((state) => state.searchVars.sort);
+
   const [config, setOrders] = useState<OrdersConfig>(
-    getConfig(INIT_ORDER_STATES)
+    getConfig(INIT_ORDER_STATES, mediaSort)
   );
 
   const handleChange = (name: string) => {

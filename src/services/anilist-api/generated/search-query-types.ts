@@ -13,7 +13,7 @@ export type SearchQueryVariables = Exact<{
   perPage?: Maybe<Scalars['Int']>;
   type?: Maybe<MediaType>;
   search?: Maybe<Scalars['String']>;
-  sort?: Maybe<Array<Maybe<MediaSort>> | Maybe<MediaSort>>;
+  sort?: Maybe<MediaSort>;
 }>;
 
 export type SearchQuery = {
