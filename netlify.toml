@@ -21,3 +21,9 @@
   to = "/react-routing/"
   status = 200
   force = false
+
+[[redirects]]
+  from = "/react-redux/*"
+  to = "/react-redux/"
+  status = 200
+  force = false
