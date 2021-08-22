@@ -5,19 +5,25 @@ import { useAppSelector } from 'store/hooks';
 import { useSearchQuery } from 'services/anilist-api/anilist-api';
 import classes from './cards.module.pcss';
 
-const selectMedia = ({ data }: { data?: SearchQuery }) => ({
+type StateSelector = {
+  data?: SearchQuery;
+  isLoading: boolean;
+};
+
+const selectMedia = ({ data, isLoading }: StateSelector) => ({
   mediaFragments: data?.Page?.media,
+  isLoading,
 });
 
 export const Cards: React.FC = () => {
   const searchVars = useAppSelector((state) => state.searchVars);
-  const { mediaFragments } = useSearchQuery(searchVars, {
+  const { mediaFragments, isLoading } = useSearchQuery(searchVars, {
     selectFromResult: selectMedia,
   });
 
   if (!mediaFragments || mediaFragments.length === 0) {
-    return (
-      <div className={classes.searchWrapper}>
+    return isLoading ? null : (
+      <div>
         （＞人＜；） No results for query: &quot;{searchVars.search}
         &quot;
       </div>
