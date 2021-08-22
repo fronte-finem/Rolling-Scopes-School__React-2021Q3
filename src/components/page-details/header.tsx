@@ -46,7 +46,7 @@ export const Header: React.FC<MediaProps> = ({ media }) => {
             source: {media.source && formatSource(media.source)}
           </div>
           <div className={classes.stats}>
-            <Stats mediaStats={media} />
+            <Stats popularity={media.popularity} score={media.meanScore} />
           </div>
           <div className={classes.status}>
             <div className={classes.date}>
