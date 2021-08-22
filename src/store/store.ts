@@ -1,13 +1,17 @@
 import { IS_PROD } from 'env';
 import { configureStore } from '@reduxjs/toolkit';
-import { detailsReducer } from './slices/detailsSlice';
-import { searchReducer } from './slices/searchSlice';
+import { anilistApi } from 'services/anilist-api/anilist-api';
+import { searchVarsReducer } from './slices/search-vars';
 
 export const store = configureStore({
   reducer: {
-    details: detailsReducer,
-    search: searchReducer,
+    searchVars: searchVarsReducer,
+    [anilistApi.reducerPath]: anilistApi.reducer,
   },
+  middleware: (getDefaultMiddleware) => [
+    ...getDefaultMiddleware(),
+    anilistApi.middleware,
+  ],
   devTools: !IS_PROD,
 });
 
