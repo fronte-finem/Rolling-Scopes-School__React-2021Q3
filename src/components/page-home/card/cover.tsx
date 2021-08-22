@@ -2,8 +2,12 @@ import React from 'react';
 import { getCountry } from 'shared/country-code';
 import { Status } from 'components/shared/status/status';
 import { Flag, Icon } from 'components/shared/svg/sprites';
+import { MediaFragment } from 'services/anilist-api/generated/search-query-types';
 import classes from './cover.module.pcss';
-import { MediaProps } from './types';
+
+export interface MediaProps {
+  media: MediaFragment;
+}
 
 export const Cover: React.FC<MediaProps> = ({ media }) => {
   const countryOfOrigin = getCountry(media.countryOfOrigin);
