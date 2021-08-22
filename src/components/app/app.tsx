@@ -1,12 +1,10 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { PUBLIC_URL } from 'env';
 import classes from './app.module.pcss';
 import { routesConfig } from './routes-config';
 import { Nav } from './nav';
 import { Content } from './content';
-
-declare const ENV_PUBLIC_URL: string;
-const PUBLIC_URL: string = ENV_PUBLIC_URL;
 
 export function App() {
   return (
