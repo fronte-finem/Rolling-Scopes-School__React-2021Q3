@@ -12,6 +12,8 @@
     "info": "autoprefixer --info"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.6.1",
+    "@rtk-query/graphql-request-base-query": "^1.0.3",
     "dompurify": "^2.3.1",
     "graphql": "^15.5.1",
     "graphql-request": "^3.5.0",
@@ -21,7 +23,8 @@
     "react-router-dom": "^5.2.0",
     "react-transition-group": "^4.4.2",
     "redux": "^4.1.1",
-    "redux-devtools-extension": "^2.13.9"
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.0.1",
