@@ -1,7 +1,7 @@
 import React from 'react';
 import { getCountry } from 'shared/country-code';
-import { Status } from 'components/status/status';
-import { Flag, Icon } from 'components/svg/sprites';
+import { Status } from 'components/shared/status/status';
+import { Flag, Icon } from 'components/shared/svg/sprites';
 import classes from './cover.module.pcss';
 import { MediaProps } from './types';
 

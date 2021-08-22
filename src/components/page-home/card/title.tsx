@@ -1,7 +1,7 @@
 import React from 'react';
 import { TitleFragment } from 'services/anilist-api/generated/search-query-types';
+import { Info } from 'components/shared/info/info';
 import classes from './title.module.pcss';
-import { Info } from '../info/info';
 import { MediaProps } from './types';
 
 const formatTip = (title: TitleFragment) =>

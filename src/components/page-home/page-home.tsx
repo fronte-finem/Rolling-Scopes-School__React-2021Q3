@@ -1,11 +1,11 @@
 import React from 'react';
 import { MediaSort } from 'services/anilist-api/generated/schema-types';
-import { Paginator } from 'components/paginator/paginator';
-import { ErrorInfo } from 'components/error-info/error-info';
-import { Cards } from 'components/cards/cards';
-import { SearchBar } from 'components/search-bar/search-bar';
-import { OrderByGroup } from 'components/order-by/order-by-group';
-import { FullLoader } from 'components/loader/full-loader';
+import { Paginator } from 'components/page-home/paginator/paginator';
+import { ErrorInfo } from 'components/shared/error-info/error-info';
+import { Cards } from 'components/page-home/cards/cards';
+import { SearchBar } from 'components/page-home/search-bar/search-bar';
+import { OrderByGroup } from 'components/page-home/order-by/order-by-group';
+import { FullLoader } from 'components/shared/loader/full-loader';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import {
   setPage,

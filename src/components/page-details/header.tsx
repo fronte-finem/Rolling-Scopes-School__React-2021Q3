@@ -1,11 +1,11 @@
 import React from 'react';
-import { Format } from 'components/format/format';
-import { Status } from 'components/status/status';
-import { Flag } from 'components/svg/sprites';
+import { Format } from 'components/shared/format/format';
+import { Status } from 'components/shared/status/status';
+import { Flag } from 'components/shared/svg/sprites';
 import { getCountry } from 'shared/country-code';
-import { Stats } from 'components/stats/stats';
-import { Info } from 'components/info/info';
-import { Genres } from 'components/genres/genres';
+import { Stats } from 'components/shared/stats/stats';
+import { Info } from 'components/shared/info/info';
+import { Genres } from 'components/shared/genres/genres';
 import { MediaProps } from './types';
 import classes from './header.module.pcss';
 import { Description } from './description';

@@ -1,8 +1,8 @@
-import { PageHome } from './page-home';
-import { Page404 } from './page-404';
-import { About } from './page-about';
-import { PageDetails } from './page-details';
-import { PageTest } from './page-test';
+import { PageHome } from 'components/page-home/page-home';
+import { Page404 } from 'components/page-404/page-404';
+import { About } from 'components/page-about/page-about';
+import { PageDetails } from 'components/page-details/page-details';
+import { PageTest } from 'components/page-test/page-test';
 
 export interface RouteConfig {
   path: string;

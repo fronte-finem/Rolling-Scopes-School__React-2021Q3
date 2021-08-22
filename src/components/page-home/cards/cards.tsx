@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from 'components/card/card';
+import { Card } from 'components/page-home/card/card';
 import { SearchQuery } from 'services/anilist-api/generated/search-query-types';
 import { useAppSelector } from 'store/hooks';
 import { useSearchQuery } from 'services/anilist-api/anilist-api';

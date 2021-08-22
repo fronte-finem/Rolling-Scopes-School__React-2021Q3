@@ -1,8 +1,8 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { FullLoader } from 'components/loader/full-loader';
-import { ErrorInfo } from 'components/error-info/error-info';
-import { Media } from 'components/media/media';
+import { FullLoader } from 'components/shared/loader/full-loader';
+import { ErrorInfo } from 'components/shared/error-info/error-info';
+import { Media } from 'components/page-details/media';
 import { updateTitle } from 'shared/update-title';
 import { useDetailsQuery } from 'services/anilist-api/anilist-api';
 import classes from './page-details.module.pcss';

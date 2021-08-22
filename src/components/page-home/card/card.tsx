@@ -1,34 +1,24 @@
 import React, { CSSProperties } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { HistoryState } from 'components/app/routing-types';
-import { Format } from 'components/format/format';
+import { useHistory } from 'react-router-dom';
+import { Format } from 'components/shared/format/format';
+import { Genres } from 'components/shared/genres/genres';
+import { Stats } from 'components/shared/stats/stats';
 import classes from './card.module.pcss';
-import { Genres } from '../genres/genres';
 import { Cover } from './cover';
 import { Title } from './title';
 import { MediaProps } from './types';
-import { Stats } from '../stats/stats';
-
-const getDetailsUrl = (id: number) => `/details/${id}`;
 
 export const Card: React.FC<MediaProps> = ({ media }) => {
-  const history = useHistory<HistoryState>();
+  const history = useHistory();
 
-  const onClick = (ev: React.MouseEvent) => {
-    ev.preventDefault();
-    ev.stopPropagation();
-    history.push({
-      pathname: getDetailsUrl(media.id),
-      state: {
-        previousRouteNum: 0,
-        currentRouteNum: Infinity,
-      },
-    });
+  const handleClick = () => {
+    history.push(`/details/${media.id}`);
   };
 
   return (
-    <Link
-      to={getDetailsUrl(media.id)}
+    <div
+      role="link"
+      tabIndex={0}
       className={classes.card}
       style={
         {
@@ -38,7 +28,8 @@ export const Card: React.FC<MediaProps> = ({ media }) => {
             'unset',
         } as CSSProperties
       }
-      onClick={onClick}>
+      onClick={handleClick}
+      onKeyDown={handleClick}>
       <Cover media={media} />
       <div className={classes.container}>
         <Title media={media} />
@@ -48,6 +39,6 @@ export const Card: React.FC<MediaProps> = ({ media }) => {
         </div>
         <Stats mediaStats={media} />
       </div>
-    </Link>
+    </div>
   );
 };

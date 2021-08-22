@@ -1,6 +1,6 @@
 import React from 'react';
 import { Maybe } from 'shared/maybe';
-import { Info } from 'components/info/info';
+import { Info } from 'components/shared/info/info';
 import classes from './stats.module.pcss';
 
 export const Stats: React.FC<{

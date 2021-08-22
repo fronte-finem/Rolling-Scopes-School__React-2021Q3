@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon } from 'components/svg/sprites';
+import { Icon } from 'components/shared/svg/sprites';
 import classes from './info.module.pcss';
 
 interface InfoProps {
