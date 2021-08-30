@@ -33,7 +33,7 @@ describe('mapGetter', () => {
     [42, 'Answer'],
   ]);
 
-  it('should safe work with map', function () {
+  it('should safe work with map', () => {
     expect(mapGetter(testMap)(null)).toBeNull();
     expect(mapGetter(testMap)(undefined)).toBeUndefined();
     expect(mapGetter(testMap)(NaN)).toEqual('Not a number');
