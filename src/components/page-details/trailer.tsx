@@ -4,21 +4,24 @@ import { TrailerFragment } from 'services/anilist-api/generated/details-query-ty
 import classes from './trailer.module.pcss';
 
 interface TrailerProps {
-  trailer: Maybe<TrailerFragment>;
+  trailer?: Maybe<TrailerFragment>;
 }
 
+const getYoutubeUrl = (id: string) => `https://www.youtube.com/embed/${id}`;
+
 export const Trailer: React.FC<TrailerProps> = ({ trailer }) => {
-  if (!trailer) return <></>;
-  if (trailer.site !== 'youtube') return <></>;
-  if (!trailer.id) return <></>;
+  if (!trailer) return null;
+  if (trailer.site !== 'youtube') return null;
+  if (!trailer.id) return null;
   return (
-    <div className={classes.trailer}>
+    <div className={classes.trailer} data-testid="trailer">
       <iframe
         className={classes.video}
-        src={`https://www.youtube.com/embed/${trailer.id}`}
+        src={getYoutubeUrl(trailer.id)}
         frameBorder="0"
         allowFullScreen
         title="trailer"
+        data-testid="trailer-video"
       />
     </div>
   );
