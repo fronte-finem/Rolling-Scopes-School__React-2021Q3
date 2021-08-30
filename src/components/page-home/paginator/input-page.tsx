@@ -9,6 +9,7 @@ export const InputPage: React.FC<{
   const [value, setValue] = useState(page);
 
   const handleInput = (event: React.FormEvent<HTMLInputElement>) => {
+    event.preventDefault();
     let nextPage = +event.currentTarget.value;
     nextPage = nextPage > last ? last : nextPage;
     nextPage = nextPage < 1 ? 1 : nextPage;
@@ -32,11 +33,13 @@ export const InputPage: React.FC<{
           step={1}
           required
           onInput={handleInput}
+          data-testid="page-input"
         />
         <button
           type="submit"
           className={classes.submit}
-          disabled={value === page}>
+          disabled={value === page}
+          data-testid="page-submit">
           {value !== page && 'go'}
         </button>
       </div>
