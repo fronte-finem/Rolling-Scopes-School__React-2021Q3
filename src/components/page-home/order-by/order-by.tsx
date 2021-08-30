@@ -18,13 +18,17 @@ export const OrderBy: React.FC<OrderByProps> = ({ order, onChange }) => {
 
   return (
     <div>
-      <button className={classes.button} type="button" onClick={handleClick}>
+      <button
+        className={classes.button}
+        type="button"
+        onClick={handleClick}
+        data-testid="order-button">
         {order.name}
         <div className={classes.order}>
-          <div className={`${classes.icon} ${asc}`}>
+          <div className={`${classes.icon} ${asc}`} data-testid="icon-asc">
             <Icon name="caret-up" />
           </div>
-          <div className={`${classes.icon} ${desc}`}>
+          <div className={`${classes.icon} ${desc}`} data-testid="icon-desc">
             <Icon name="caret-down" />
           </div>
         </div>
