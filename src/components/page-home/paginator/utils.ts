@@ -8,38 +8,21 @@ export function tail<T>(array: T[]): Maybe<T> {
   return array.length === 0 ? undefined : array[array.length - 1];
 }
 
+export const clamp = (min: number, max: number, value: number): number => {
+  return Math.min(max, Math.max(min, value));
+};
+
 export const getRange = (
-  current: number,
-  last: number,
+  value: number,
+  max: number,
   length: number
 ): number[] => {
-  let maxStart = last - length + 1;
-  maxStart = maxStart < 1 ? 1 : maxStart;
-
-  let minEnd = length - 1;
-  minEnd = minEnd > last ? last : minEnd;
-
+  const maxStart = Math.max(1, max - length + 1);
   const half = Math.floor(length / 2);
 
-  let start = current - half;
-  start = start < 1 ? 1 : start;
-  start = start > maxStart ? maxStart : start;
+  const start = clamp(1, maxStart, value - half);
 
-  let end = start + length - 1;
-  end = end > last ? last : end;
-  end = end < minEnd ? minEnd : end;
-
-  // console.log(current, last, length, ' => ', maxStart, minEnd, start, end);
-
-  return Array(end + 1 - start)
+  return Array(Math.min(length, max))
     .fill(start)
     .map((num, index) => num + index);
 };
-
-// console.log(getRange(1, 13, 5));
-// console.log(getRange(3, 13, 5));
-// console.log(getRange(5, 13, 5));
-// console.log(getRange(7, 13, 5));
-// console.log(getRange(9, 13, 5));
-// console.log(getRange(11, 13, 5));
-// console.log(getRange(13, 13, 5));
