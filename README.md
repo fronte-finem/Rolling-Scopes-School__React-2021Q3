@@ -2,7 +2,7 @@
 
 Что должно быть сделано:
 
-1) Создать отдельную ветку для этого задания из ветки с заданием `React. API` (https://github.com/rolling-scopes-school/tasks/blob/master/tasks/react/react-api.md)
+1) Создать отдельную ветку для этого задания из ветки с заданием [React-API][prev]
   - [x] done
 2) Добавить на страницу header с навигацией.
   - Навигация должна включать ссылки: Home(url: '/'), About(url: '/about').
