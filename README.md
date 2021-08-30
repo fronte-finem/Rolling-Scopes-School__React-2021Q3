@@ -1,29 +1,20 @@
-## Task: [React. Router][task]
+## Task: [React. Redux][task]
 
 Что должно быть сделано:
 
-1) Создать отдельную ветку для этого задания из ветки с заданием [React-API][prev]
-  - [x] done
-2) Добавить на страницу header с навигацией.
-  - Навигация должна включать ссылки: Home(url: '/'), About(url: '/about').
-    - [x] done
-  - Создать страницу About(заглушка, пустая страница с каким-нибудь текстом)
-    - [x] done
-  - Показывать страницу с поиском(сделана в предыдущем задании) если url `/`, страницу About если url `/about`.
-    - [x] done
-  - Ссылка в навигации должна визуально выделяться, если пользователь находится на странице, которой эта ссылка соответствует.
-    - [x] done
-  - Переход между Home и About выполняется с анимацией (можно использовать: http://reactcommunity.org/react-transition-group/css-transition)
-    - [x] done
-3) Создать 404 страницу, которая будет показываться, если пользователь ввел url, для которого у нас нет инструкций.(Например: '/test-url', '/ab/cd', '/aboutA' etc.)
+1) Создать отдельную ветку для этого задания из ветки с заданием [React-Router][prev]
    - [x] done
-4) Создать страницу Details(url: '/details/${id}')
-  - Страница отображает детальную информацию об одном из элементов в списке на главной странице(выводим все данные, что знаем в любом формате)
-    - [x] done
-  - Чтобы попасть на данную страницу, нужно нажать на элемент в списке на главной странице
-    - [x] done
-  - При перезагрузке страницы данные не должны теряться
-    - [x] done
+2) Установить redux и redux-dev-tools(redux-dev-tools должны быть только в dev сборке)
+   - [x] done
+3) Сконфигурировать store, и добавить Provider в index.(j|t)sx
+   - [x] done
+     - для конфигурирования использовал [configureStore][store] из пакета `reduxjs/toolkit`
+4) Переместить всю работу с api и данными в redux. Т.е. данные больше не запрашиваются напрямую в компоненте, запрашиваем данные через Actions, и храним в store. В компоненту данные так же попадают из store.
+   - [x] done
+     - для организации работы с поисковыми-переменными применил [createSlice][slice] из пакета `reduxjs/toolkit`
+     - для организации запроса данных использовал [createApi][api-slice] из пакета `reduxjs/toolkit/query`
+
+**!! Перед выполнением задания ознакомьтесь с тем как устроен поток данных в redux, а так же что такое Store, reducer, Action and dispatch !!**
 
 ### Оценка
 
@@ -35,8 +26,12 @@
 2) 2 + 3 + 4 - **14.5 баллов**
 Если хоть один из пунктов не выполнен, то задание оценивается в **0 баллов**.
 
-[prev]: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/react/react-api.md
-[task]: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/react/react-routing.md
-[pull]: https://github.com/fronte-finem/React-RSSchool-2021q3/pull/4
-[deploy]: https://fronte-finem.netlify.app/react-routing/
+[prev]: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/react/react-routing.md
+[task]: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/react/react-redux.md
+[pull]: https://github.com/fronte-finem/React-RSSchool-2021q3/pull/5
+[deploy]: https://fronte-finem.netlify.app/react-redux/
 [api]: https://anilist.gitbook.io/anilist-apiv2-docs/
+
+[store]: https://redux.js.org/tutorials/essentials/part-2-app-structure#creating-the-redux-store
+[slice]: https://redux.js.org/tutorials/essentials/part-2-app-structure#creating-slice-reducers-and-actions
+[api-slice]: https://redux-toolkit.js.org/rtk-query/overview#create-an-api-slice
