@@ -4,7 +4,7 @@ import reactRefresh from '@vitejs/plugin-react-refresh';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import viteImagemin from 'vite-plugin-imagemin';
 import viteGraphlQl from 'vite2-graphql-plugin';
-import eslint from '@rollup/plugin-eslint';
+import checker from 'vite-plugin-checker';
 
 const NAME = 'react-redux';
 
@@ -62,14 +62,13 @@ export default defineConfig(({ command, mode }) => {
     },
 
     plugins: [
-      {
-        ...eslint({
-          include: '**/*.+(js|jsx|ts|tsx)',
-          throwOnError: true,
-          throwOnWarning: true,
-        }),
-        enforce: 'pre',
-      },
+      checker({
+        typescript: true,
+        eslint: {
+          files: ['./src'],
+          extensions: ['.ts', '.tsx'],
+        },
+      }),
       viteGraphlQl(),
       tsconfigPaths(),
       reactRefresh(),
