@@ -1,11 +1,11 @@
 import React from 'react';
-import { Maybe } from 'shared/maybe';
+import { isValue, Maybe } from 'shared/maybe';
 import { MediaFormat } from 'services/anilist-api/generated/schema-types';
 
 const addS = (x: number) => (x > 1 ? 's' : '');
 
-const format = (name: string, value: Maybe<number>) =>
-  (value && ` • ${value} ${name}${addS(value)}`) || undefined;
+export const format = (name: string, value: Maybe<number>) =>
+  isValue(value) ? ` • ${value} ${name}${addS(value)}` : '';
 
 interface FormatData {
   format?: Maybe<MediaFormat>;
@@ -21,32 +21,28 @@ interface FormatProps {
 }
 
 export const Format: React.FC<FormatProps> = ({ data, short, className }) => {
-  if (!data.format) return <></>;
+  if (!data.format) return null;
+  const volumes = format('volume', data.volumes);
+  const chapters = format('chapter', data.chapters);
+  const duration = format('min', data.duration);
+  const episodes = format('episode', data.episodes);
   let description: Maybe<string>;
   switch (data.format) {
     case MediaFormat.Manga:
     case MediaFormat.Novel:
     case MediaFormat.OneShot:
-      description = short
-        ? format('chapter', data.chapters)
-        : `${format('volume', data.volumes) || ''}${
-            format('chapter', data.chapters) || ''
-          }` || undefined;
+      description = `${short ? '' : volumes}${chapters}`;
       break;
     case MediaFormat.Movie:
     case MediaFormat.Music:
-      description = format('min', data.duration);
+      description = duration;
       break;
     default:
-      description = short
-        ? format('episode', data.episodes)
-        : `${format('episode', data.episodes) || ''}${
-            format('min', data.duration) || ''
-          }` || undefined;
+      description = `${episodes}${short ? '' : duration}`;
       break;
   }
   return (
-    <div className={className}>
+    <div className={className} data-testid="format">
       {data.format.split('_').join(' ')}
       {description}
     </div>
