@@ -16,7 +16,8 @@ export const Media: React.FC<MediaProps> = ({ media }) => {
           '--main-c': media.coverImage?.color || '#fff',
           '--top-offset': media.bannerImage ? '200px' : '20px',
         } as CSSProperties
-      }>
+      }
+      data-testid="media">
       <Banner url={media.bannerImage} />
       <section className={classes.content}>
         <div className={classes.cover}>
