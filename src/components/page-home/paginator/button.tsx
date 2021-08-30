@@ -11,7 +11,8 @@ export const Button: React.FC<{
       type="button"
       className={classes.button}
       disabled={disabled}
-      onClick={() => onClick(page)}>
+      onClick={() => onClick(page)}
+      data-testid="paginator-button">
       {page}
     </button>
   );
