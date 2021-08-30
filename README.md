@@ -2,12 +2,12 @@
 
 Task | Pull request | Deploy
 ---  | ---          | ---
-[📜 React. Components][task 1] | [**~ 1 ~**][pull 1] | [🚀 react-components][deploy 1]
-[📜 React. Forms][task 2]      | [**~ 2 ~**][pull 2] | [🚀 react-forms][deploy 2]
-[📜 React. API][task 3]        | [**~ 3 ~**][pull 3] | [🚀 react-api][deploy 3]
-[📜 React. Routing][task 4]    | [**~ 4 ~**][pull 4] | [🚀 react-routing][deploy 4]
-[📜 React. Redux][task 5]      | [**~ 5 ~**][pull 5] | [🚀 react-redux][deploy 5]
-[📜 React. Testing][task 6]    | [**~ 6 ~**][pull 5] | 
+[📜 React. Components][task 1] | [~ 1 ~][pull 1] | [🚀 react-components][deploy 1]
+[📜 React. Forms][task 2]      | [~ 2 ~][pull 2] | [🚀 react-forms][deploy 2]
+[📜 React. API][task 3]        | [~ 3 ~][pull 3] | [🚀 react-api][deploy 3]
+[📜 React. Routing][task 4]    | [~ 4 ~][pull 4] | [🚀 react-routing][deploy 4]
+[📜 React. Redux][task 5]      | [~ 5 ~][pull 5] | [🚀 react-redux][deploy 5]
+[📜 React. Testing][task 6]    | [~ 6 ~][pull 6] | 
 
 
 [task 1]: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/react/react-components.md
