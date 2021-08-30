@@ -14,7 +14,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
     setSearch('');
   };
 
-  const handleSearch = (event: React.FormEvent<HTMLInputElement>) => {
+  const handleInput = (event: React.FormEvent<HTMLInputElement>) => {
     setSearch(event.currentTarget.value);
   };
 
@@ -27,9 +27,13 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
             type="text"
             value={search}
             placeholder="hero"
-            onInput={handleSearch}
+            onInput={handleInput}
+            data-testid="search-input"
           />
-          <button className={classes.searchButton} type="submit">
+          <button
+            className={classes.searchButton}
+            type="submit"
+            data-testid="search-submit">
             search
           </button>
         </div>
