@@ -19,8 +19,7 @@ export const OrderByGroup: React.FC<OrderByGroupProps> = ({ onChange }) => {
 
   const handleChange = (name: string) => {
     setOrders((prev) => {
-      const order = prev[name]?.next();
-      if (!order) return prev;
+      const order = prev[name].next();
       onChange(order.toSort());
       return { ...getConfig(INIT_ORDER_STATES), [name]: order };
     });
@@ -29,7 +28,7 @@ export const OrderByGroup: React.FC<OrderByGroupProps> = ({ onChange }) => {
   return (
     <ul className={classes.group}>
       {Object.values(config).map((order) => (
-        <li key={order.name}>
+        <li key={order.name} data-testid="order-item">
           <OrderBy order={order} onChange={handleChange} />
         </li>
       ))}
