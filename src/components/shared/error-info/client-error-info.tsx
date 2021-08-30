@@ -7,9 +7,11 @@ interface ClientErrorInfoProps {
 
 export const ClientErrorInfo: React.FC<ClientErrorInfoProps> = ({ error }) => {
   return (
-    <div>
-      <pre>
-        <code>{JSON.stringify(error, null, 2)}</code>
+    <div data-testid="client-error-info">
+      <pre data-testid="client-error-info-pre">
+        <code data-testid="client-error-info-code">
+          {JSON.stringify(error, null, 2)}
+        </code>
       </pre>
     </div>
   );
