@@ -24,7 +24,7 @@ export const Paginator: React.FC<PaginatorProps> = ({
     selectFromResult: selectPageInfo,
   });
 
-  if (!pageInfo || !pageInfo.total || pageInfo.total === 0) return <></>;
+  if (!pageInfo || !pageInfo.total || pageInfo.total === 0) return null;
 
   const handlePageSelect = (page: number) => {
     onPageSelect(page);
