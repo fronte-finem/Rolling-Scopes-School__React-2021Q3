@@ -22,3 +22,7 @@ yarn.lock
 # dotenv environment variables files
 .env
 .env.test
+
+# tests
+coverage
+tests-coverage
