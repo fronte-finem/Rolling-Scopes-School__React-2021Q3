@@ -42,5 +42,4 @@
 [wiki]: https://mightandmagic.fandom.com/wiki/Category:Heroes_VII_creatures
 [mmh7]: https://mmh7.ubi.com/en/blog
 [pull]: https://github.com/fronte-finem/React-RSSchool-2021q3/pull/1
-[pull]: https://fronte-finem.netlify.app/react-components/
 [deploy]: https://fronte-finem.netlify.app/react-components/
