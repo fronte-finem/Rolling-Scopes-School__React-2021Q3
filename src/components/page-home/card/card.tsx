@@ -5,7 +5,7 @@ import { Format } from 'components/shared/format/format';
 import { Genres } from 'components/shared/genres/genres';
 import { Stats } from 'components/shared/stats/stats';
 import { MediaFragment } from 'services/anilist-api/generated/search-query-types';
-import { formatRecObj } from 'shared/object-utils';
+// import { formatRecObj } from 'shared/object-utils';
 import classes from './card.module.pcss';
 import { Cover } from './cover';
 import { Title } from './title';
@@ -34,7 +34,7 @@ export const Card: React.FC<MediaProps> = ({ media }) => {
   return (
     <Link
       to={getDetailsUrl(media.id)}
-      title={formatRecObj(media.title)}
+      title={`${window.location}${url.slice(1)}`}
       className={classes.card}
       onClick={onClick}
       style={
@@ -44,7 +44,8 @@ export const Card: React.FC<MediaProps> = ({ media }) => {
             (media.coverImage?.large && `url(${media.coverImage?.large})`) ||
             'unset',
         } as CSSProperties
-      }>
+      }
+      data-testid="card">
       <Cover media={media} />
       <div className={classes.container}>
         <Title title={media.title} studio={media?.studios?.nodes?.[0]?.name} />
