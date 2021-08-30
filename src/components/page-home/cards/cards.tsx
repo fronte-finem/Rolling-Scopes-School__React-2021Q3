@@ -23,7 +23,7 @@ export const Cards: React.FC = () => {
 
   if (!mediaFragments || mediaFragments.length === 0) {
     return isLoading ? null : (
-      <div>
+      <div data-testid="cards-empty">
         （＞人＜；） No results for query: &quot;{searchVars.search}
         &quot;
       </div>
@@ -31,7 +31,7 @@ export const Cards: React.FC = () => {
   }
 
   return (
-    <ul className={classes.cards}>
+    <ul className={classes.cards} data-testid="cards">
       {mediaFragments.map(
         (fragment) =>
           fragment && (
