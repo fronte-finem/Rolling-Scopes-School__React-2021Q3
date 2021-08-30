@@ -1,5 +1,5 @@
 import React from 'react';
-import { Maybe } from 'shared/maybe';
+import { isNone, Maybe } from 'shared/maybe';
 import { Info } from 'components/shared/info/info';
 import classes from './stats.module.pcss';
 
@@ -9,6 +9,7 @@ interface StatsProps {
 }
 
 export const Stats: React.FC<StatsProps> = ({ popularity, score }) => {
+  if (isNone(popularity) && isNone(score)) return null;
   return (
     <div className={classes.stats}>
       {score && <Info info={score / 10} icon="star" />}
