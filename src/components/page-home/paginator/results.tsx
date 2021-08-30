@@ -17,12 +17,15 @@ export const Results: React.FC<ResultsProps> = ({ pageInfo, onSelect }) => {
 
   return (
     <div className={classes.results}>
-      <div>Results ({pageInfo.total}), per page:</div>
+      <div data-testid="results-total">
+        Results ({pageInfo.total || 0}), per page:
+      </div>
       <select
         className={classes.selectPerPage}
         name="per-page"
         value={pageInfo.perPage || 10}
-        onChange={handleSelect}>
+        onChange={handleSelect}
+        data-testid="results-per-page">
         {Array(MAX_RESULTS / STEP)
           .fill(MIN_RESULTS)
           .map((a, i) => a + i * STEP)
