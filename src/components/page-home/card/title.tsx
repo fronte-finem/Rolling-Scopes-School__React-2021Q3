@@ -5,7 +5,7 @@ import { Maybe } from 'shared/maybe';
 import classes from './title.module.pcss';
 
 interface TitleProps {
-  title: Maybe<TitleFragment>;
+  title?: Maybe<TitleFragment>;
   studio?: string;
 }
 
@@ -14,7 +14,7 @@ const selectTitle = (title: TitleFragment) => {
 };
 
 export const Title: React.FC<TitleProps> = ({ title, studio }) => {
-  if (!title) return <></>;
+  if (!title) return null;
   return (
     <div className={classes.header}>
       <div className={classes.title}>{selectTitle(title)}</div>
