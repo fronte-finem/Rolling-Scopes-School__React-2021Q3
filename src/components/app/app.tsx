@@ -8,12 +8,12 @@ import { Main } from './main';
 
 export function App() {
   return (
-    <div className={classes.app}>
+    <div className={classes.app} data-testid="app">
       <BrowserRouter basename={PUBLIC_URL}>
-        <header className={classes.header}>
+        <header className={classes.header} data-testid="header">
           <Nav config={routesConfig} />
         </header>
-        <main className={classes.main}>
+        <main className={classes.main} data-testid="main">
           <Main config={routesConfig} />
         </main>
       </BrowserRouter>
