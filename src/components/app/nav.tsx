@@ -52,7 +52,8 @@ export const Nav: React.FC<NavProps> = ({ config }) => {
                 exact
                 className={classes.navLink}
                 activeClassName={classes.navLinkActive}
-                onClick={getOnClick(route.path)}>
+                onClick={getOnClick(route.path)}
+                data-testid="nav-link">
                 {route.name}
               </NavLink>
             </li>
@@ -62,7 +63,8 @@ export const Nav: React.FC<NavProps> = ({ config }) => {
             to={digitsPath}
             className={classes.navLink}
             activeClassName={classes.navLinkActive}
-            onClick={getOnClick(digitsPath)}>
+            onClick={getOnClick(digitsPath)}
+            data-testid="nav-link">
             0 - 9
           </NavLink>
         </li>
@@ -71,7 +73,8 @@ export const Nav: React.FC<NavProps> = ({ config }) => {
             to={charsPath}
             className={classes.navLink}
             activeClassName={classes.navLinkActive}
-            onClick={getOnClick(charsPath)}>
+            onClick={getOnClick(charsPath)}
+            data-testid="nav-link">
             a - z
           </NavLink>
         </li>
