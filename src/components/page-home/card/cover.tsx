@@ -12,14 +12,14 @@ export interface MediaProps {
 export const Cover: React.FC<MediaProps> = ({ media }) => {
   const countryOfOrigin = getCountry(media.countryOfOrigin);
 
-  if (!media.coverImage) return <></>;
   return (
     <div className={classes.cover}>
-      {media.coverImage.large && (
+      {media.coverImage?.large && (
         <img
           className={classes.coverImage}
           src={media.coverImage.large}
           alt={media.title?.english || media.title?.native || 'cover'}
+          data-testid="cover-image"
         />
       )}
       {media.isAdult && (
@@ -36,7 +36,7 @@ export const Cover: React.FC<MediaProps> = ({ media }) => {
             <Flag name={countryOfOrigin} />
           </div>
         )}
-        <div className={classes.year}>
+        <div className={classes.year} data-testid="cover-year">
           {media.seasonYear ||
             media.startDate?.year ||
             `> ${new Date().getFullYear() + 2}`}
