@@ -11,7 +11,7 @@ import {
 import searchQuery from 'services/anilist-api/queries/search-query.graphql';
 import detailsQuery from 'services/anilist-api/queries/details-query.graphql';
 
-const API_ENDPOINT = 'https://graphql.anilist.co';
+export const API_ENDPOINT = 'https://graphql.anilist.co/';
 
 export const anilistApi = createApi({
   reducerPath: 'anilistApi',
