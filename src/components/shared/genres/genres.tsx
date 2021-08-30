@@ -1,5 +1,5 @@
 import React from 'react';
-import { isNone, Maybe } from 'shared/maybe';
+import { isNone, isValue, Maybe } from 'shared/maybe';
 import classes from './genres.module.pcss';
 
 interface GenresProps {
@@ -7,14 +7,16 @@ interface GenresProps {
 }
 
 export const Genres: React.FC<GenresProps> = ({ genres }) => {
-  if (isNone(genres)) return <></>;
+  if (isNone(genres)) return null;
   return (
     <ul className={classes.genresList}>
-      {genres.map((genre) => (
-        <li key={genre}>
-          <div className={classes.genresItem}>{genre}</div>
-        </li>
-      ))}
+      {genres
+        .filter((x): x is string => isValue(x) && x !== '')
+        .map((genre) => (
+          <li key={genre} data-testid="genre-item">
+            <div className={classes.genresItem}>{genre}</div>
+          </li>
+        ))}
     </ul>
   );
 };
