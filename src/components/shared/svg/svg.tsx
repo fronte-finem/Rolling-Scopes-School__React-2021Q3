@@ -14,7 +14,7 @@ interface SvgProps extends SvgPropsBase {
 export const Svg: React.FC<SvgProps> = ({ src, name, prefix = '', fill }) => {
   return (
     <svg className={classes.svg} style={{ fill }}>
-      <use href={`${src}#${prefix}${name}`} />
+      <use href={`${src}#${prefix}${name}`} data-testid="svg-use" />
     </svg>
   );
 };
