@@ -10,10 +10,10 @@ interface CharactersNodes {
 }
 
 interface CharactersProps {
-  characters: Maybe<CharactersNodes>;
+  characters?: Maybe<CharactersNodes>;
 }
 
-const formatGender = (gender: string) => {
+export const formatGender = (gender: string) => {
   switch (gender.toLowerCase()) {
     case 'male':
       return '♂️';
@@ -26,6 +26,7 @@ const formatGender = (gender: string) => {
 
 export const Characters: React.FC<CharactersProps> = ({ characters }) => {
   if (!characters?.nodes) return null;
+  if (characters.nodes.length === 0) return null;
   return (
     <ul className={classes.characters}>
       {characters.nodes.filter(isValue).map((char) => (
@@ -37,15 +38,24 @@ export const Characters: React.FC<CharactersProps> = ({ characters }) => {
                   className={classes.coverImage}
                   src={char.image?.large || char.image.medium}
                   alt={char.name?.full || 'character'}
+                  data-testid="character-image"
                 />
               </div>
             )}
             <div className={classes.content}>
               <div className={classes.info}>
-                {char.name?.full && <div>{char.name.full}</div>}
+                {char.name?.full && (
+                  <div data-testid="character-name">{char.name.full}</div>
+                )}
                 <div className={classes.infoMore}>
-                  {char.gender && <div>{formatGender(char.gender)}</div>}
-                  {char.age && <div>{char.age} y.o.</div>}
+                  {char.gender && (
+                    <div data-testid="character-gender">
+                      {formatGender(char.gender)}
+                    </div>
+                  )}
+                  {char.age && (
+                    <div data-testid="character-age">{char.age} y.o.</div>
+                  )}
                 </div>
               </div>
             </div>
