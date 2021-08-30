@@ -10,19 +10,20 @@ const PURIFY_CONFIG: DOMPurify.Config & NoDOM = {
 };
 
 interface DescriptionProps {
-  text: Maybe<string>;
+  text?: Maybe<string>;
 }
 
 export const Description: React.FC<DescriptionProps> = ({ text }) => {
-  if (!text) return <></>;
+  if (!text) return null;
   return (
-    <div className={classes.description}>
+    <div className={classes.description} data-testid="description">
       <p
         className={classes.text}
         /* eslint-disable-next-line react/no-danger */
         dangerouslySetInnerHTML={{
           __html: DOMPurify.sanitize(text, PURIFY_CONFIG),
         }}
+        data-testid="description-text"
       />
     </div>
   );
