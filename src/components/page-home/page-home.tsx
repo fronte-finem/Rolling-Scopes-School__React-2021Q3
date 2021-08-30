@@ -16,28 +16,24 @@ import {
 import { useSearchQuery } from 'services/anilist-api/anilist-api';
 import classes from './page-home.module.pcss';
 
-export function PageHome() {
+export const PageHome = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const searchVars = useAppSelector((state) => state.searchVars);
   const { isLoading, isError, error } = useSearchQuery(searchVars);
 
   const handlePageSelect = (num: number) => {
-    console.log('Selected page:', num);
     dispatch(setPage(num));
   };
 
   const handlePerPageSelect = (num: number) => {
-    console.log('Selected results per page:', num);
     dispatch(setPerPage(num));
   };
 
   const handleSubmit = (str: string) => {
-    console.log('Search:', str);
     dispatch(setSearch(str || undefined));
   };
 
   const handleOrderBy = (mediaSort?: MediaSort) => {
-    console.log('Order by:', mediaSort);
     dispatch(setSort(mediaSort));
   };
 
@@ -72,4 +68,4 @@ export function PageHome() {
       </div>
     </div>
   );
-}
+};
