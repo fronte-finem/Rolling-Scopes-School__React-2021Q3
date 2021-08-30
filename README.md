@@ -2,11 +2,12 @@
 
 Task | Pull request | Deploy
 ---  | ---          | ---
-[📜 React Components][task 1] | [source 🧑‍💻 code][pull 1] | [netlify 🚀][deploy 1]
-[📜 React Forms][task 2]      | [source 🧑‍💻 code][pull 2] | [netlify 🚀][deploy 2]
-[📜 React API][task 3]        | [source 🧑‍💻 code][pull 3] | [netlify 🚀][deploy 3]
-[📜 React Routing][task 4]    | [source 🧑‍💻 code][pull 4] | [netlify 🚀][deploy 4]
-[📜 React Redux][task 5]      | [source 🧑‍💻 code][pull 5] | [netlify 🚀][deploy 5]
+[📜 React. Components][task 1] | [**~ 1 ~**][pull 1] | [🚀 react-components][deploy 1]
+[📜 React. Forms][task 2]      | [**~ 2 ~**][pull 2] | [🚀 react-forms][deploy 2]
+[📜 React. API][task 3]        | [**~ 3 ~**][pull 3] | [🚀 react-api][deploy 3]
+[📜 React. Routing][task 4]    | [**~ 4 ~**][pull 4] | [🚀 react-routing][deploy 4]
+[📜 React. Redux][task 5]      | [**~ 5 ~**][pull 5] | [🚀 react-redux][deploy 5]
+[📜 React. Testing][task 6]    | [**~ 6 ~**][pull 5] | 
 
 
 [task 1]: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/react/react-components.md
@@ -14,12 +15,14 @@ Task | Pull request | Deploy
 [task 3]: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/react/react-api.md
 [task 4]: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/react/react-routing.md
 [task 5]: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/react/react-redux.md
+[task 6]: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/react/react-testing.md
 
 [pull 1]: https://github.com/fronte-finem/React-RSSchool-2021q3/pull/1
 [pull 2]: https://github.com/fronte-finem/React-RSSchool-2021q3/pull/2
 [pull 3]: https://github.com/fronte-finem/React-RSSchool-2021q3/pull/3
 [pull 4]: https://github.com/fronte-finem/React-RSSchool-2021q3/pull/4
 [pull 5]: https://github.com/fronte-finem/React-RSSchool-2021q3/pull/5
+[pull 6]: https://github.com/fronte-finem/React-RSSchool-2021q3/pull/6
 
 [deploy 1]: https://fronte-finem.netlify.app/react-components/
 [deploy 2]: https://fronte-finem.netlify.app/react-forms/
