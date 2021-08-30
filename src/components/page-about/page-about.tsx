@@ -22,7 +22,7 @@ const SOLUTION = {
   'Redux Toolkit Query': 'https://redux-toolkit.js.org/tutorials/rtk-query',
 };
 
-export function About() {
+export function PageAbout() {
   return (
     <div className={classes.pageAbout}>
       <div>
