@@ -1,40 +1,29 @@
-## Task: [React. API][task]
+## Task: [React. Router][task]
 
 Что должно быть сделано:
 
-1) Создать отдельную ветку для этого задания
-   - [x] done
-2) Настроить webpack. Использование create-react-app запрещено. Можно использовать любую другую тулу для сборки(vite, rollup, esbuild)
-   - [x] vite
-3) Добавить скрипт для prod/dev сборки(в prod должна быть минификация, source-maps и другие оптимизации)
-  - [x] `package.json` + `vite.config.ts`:
-    - dev: `npm run dev` (dev-server + react-refresh + source-maps)
-    - prod: `npm run build` (split-chunks + minify + source-maps)
-4) Настроить eslint(airbnb или строже), prettier так, чтобы проект не собирался при наличие ошибок.
-   - [x] `airbnb-typescript` + `react-preset` + `prettier-preset`
-   - [x] eslint vite plugin
-5) Создать React App которое состоит из 4 логических частей:
-  - **строка поиска.** Вводим текст -> нажимаем Enter -> отправляем запрос к API с введенным параметром -> список результатов поиска обновляется
-    - [x] done
-  - **список результатов поиска**: отображает данные, которые вернул API запрос(чем информативнее, тем лучше, но не больше 7 параметров).
-  Предлагается использовать следующие API(но можно использовать любое другое, которое вам нравится, если оно поддерживает поиск, пагинацию и сортировку):
-    - https://www.flickr.com/services/api/flickr.photos.search.html
-    - https://newsapi.org/docs/endpoints/everything
-    - https://the-one-api.dev/documentation
-    - [x] done
-      - понравилось [AniList API][api] c поддержкой поискa, пагинации и сортировок
-      - для работы с ним использовал интроспекцию его GraphQL схемы с последующей генерацией TS типов
-      - для удобства запросов - простая обертка над fetch - `graphql-request`
-  - **переключатели для сортировки**(как минимум три варианта сортировки). Выбираем параметр -> отправляем запрос к API с введенным параметром -> список результатов поиска обновляется
-    - [x] done
-  - **переключатели для пагинации.** Должна быть возможность выбрать количество результатов на странице и номер страницы, на которой мы находимся сейчас + общее количество страниц. Выбираем параметр -> отправляем запрос к API с введенным параметром -> список результатов поиска обновляется
-    - [x] done
-6) Сделать индикатор загрузки (компонент с анимацией или хотя бы строка - "Загружаем"). Расположение индикатора на свое чувство прекрасного.
-   - [x] done
-
-Все логические части должны быть вынесены в компоненты.
-**User friendly интерфейс с индекатором загрузки и сообщениями на случай если данные не найдены или что-то сломалось приветствуются.**
+1) Создать отдельную ветку для этого задания из ветки с заданием `React. API` (https://github.com/rolling-scopes-school/tasks/blob/master/tasks/react/react-api.md)
   - [x] done
+2) Добавить на страницу header с навигацией.
+  - Навигация должна включать ссылки: Home(url: '/'), About(url: '/about').
+    - [x] done
+  - Создать страницу About(заглушка, пустая страница с каким-нибудь текстом)
+    - [x] done
+  - Показывать страницу с поиском(сделана в предыдущем задании) если url `/`, страницу About если url `/about`.
+    - [x] done
+  - Ссылка в навигации должна визуально выделяться, если пользователь находится на странице, которой эта ссылка соответствует.
+    - [x] done
+  - Переход между Home и About выполняется с анимацией (можно использовать: http://reactcommunity.org/react-transition-group/css-transition)
+    - [x] done
+3) Создать 404 страницу, которая будет показываться, если пользователь ввел url, для которого у нас нет инструкций.(Например: '/test-url', '/ab/cd', '/aboutA' etc.)
+   - [x] done
+4) Создать страницу Details(url: '/details/${id}')
+  - Страница отображает детальную информацию об одном из элементов в списке на главной странице(выводим все данные, что знаем в любом формате)
+    - [x] done
+  - Чтобы попасть на данную страницу, нужно нажать на элемент в списке на главной странице
+    - [x] done
+  - При перезагрузке страницы данные не должны теряться
+    - [x] done
 
 ### Оценка
 
@@ -43,10 +32,11 @@
   - [x] [Deploy][deploy]
 
 1) Webpack, eslint, prettier, scripts - **0.5 балла**
-2) App + API - **14.5 баллов**
+2) 2 + 3 + 4 - **14.5 баллов**
 Если хоть один из пунктов не выполнен, то задание оценивается в **0 баллов**.
 
-[task]: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/react/react-api.md
-[pull]: https://github.com/fronte-finem/React-RSSchool-2021q3/pull/3
-[deploy]: https://fronte-finem.netlify.app/react-api/
+[prev]: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/react/react-api.md
+[task]: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/react/react-routing.md
+[pull]: https://github.com/fronte-finem/React-RSSchool-2021q3/pull/4
+[deploy]: https://fronte-finem.netlify.app/react-routing/
 [api]: https://anilist.gitbook.io/anilist-apiv2-docs/
