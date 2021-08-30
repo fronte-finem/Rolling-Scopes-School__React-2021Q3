@@ -1,8 +1,9 @@
 import React from 'react';
+import { getCountry } from 'shared/country-code';
+import { TitleFragment } from 'services/anilist-api/generated/search-query-types';
 import { Format } from 'components/shared/format/format';
 import { Status } from 'components/shared/status/status';
 import { Flag } from 'components/shared/svg/sprites';
-import { getCountry } from 'shared/country-code';
 import { Stats } from 'components/shared/stats/stats';
 import { Info } from 'components/shared/info/info';
 import { Genres } from 'components/shared/genres/genres';
@@ -10,8 +11,11 @@ import { MediaProps } from './types';
 import classes from './header.module.pcss';
 import { Description } from './description';
 
-const formatSource = (source: string) =>
+export const formatSource = (source: string) =>
   source.toLowerCase().split('_').join(' ');
+
+const isTitleDiff = ({ english, romaji }: TitleFragment): boolean =>
+  english?.toLowerCase() !== romaji?.toLowerCase();
 
 export const Header: React.FC<MediaProps> = ({ media }) => {
   const countryOfOrigin = getCountry(media.countryOfOrigin);
@@ -20,14 +24,12 @@ export const Header: React.FC<MediaProps> = ({ media }) => {
     <header className={classes.header}>
       <div className={classes.head}>
         <div className={classes.title}>
-          <h2 className={classes.heading}>
-            {media.title?.romaji}
-            {media.title?.english &&
-              media.title?.romaji &&
-              media.title.english.toLowerCase() !==
-                media.title.romaji.toLowerCase() &&
-              ` (${media.title.english})`}
-          </h2>
+          {media.title?.romaji && (
+            <h2 className={classes.heading}>{media.title.romaji}</h2>
+          )}
+          {media.title?.english && isTitleDiff(media.title) && (
+            <h2 className={classes.heading}>{media.title.english}</h2>
+          )}
           {media.title?.native && (
             <h3 className={classes.heading}>{media.title.native}</h3>
           )}
