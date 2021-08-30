@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { updateTitle } from 'shared/update-title';
+import { updateTitle } from 'shared/dom-utils';
 import { RouteConfig } from './routes-config';
 import { HistoryState } from './routing-types';
 import classesSlideForward from './routing-slide-forward.module.pcss';
