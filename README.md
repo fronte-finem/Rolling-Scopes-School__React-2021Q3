@@ -1,4 +1,4 @@
-# React-RSSchool-2021q3 :atom:
+# [Rolling Scopes School](https://rs.school) - [React](https://github.com/rolling-scopes-school/tasks/tree/master/tasks/react) - 2021Q3
 
 Task | Pull request | Deploy
 ---  | ---          | ---
