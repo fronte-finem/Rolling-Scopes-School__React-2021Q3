@@ -1,21 +1,43 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import { RouteConfig } from './routes-config';
 import classes from './nav.module.pcss';
+import { HistoryState } from './routing-types';
 
-const digits = Array(10)
-  .fill(0)
-  .map((a, i) => a + i);
+const getSeq = (len: number, init = 0) =>
+  Array(len)
+    .fill(init)
+    .map((a, i) => a + i);
 
-const chars = Array(26)
-  .fill(97)
-  .map((a, i) => String.fromCharCode(a + i));
+const digitsPath = `/${getSeq(10).join('/')}`;
+const charsPath = `/${getSeq(26, 97)
+  .map((x) => String.fromCharCode(x))
+  .join('/')}`;
+
+const getRouteNum = (config: RouteConfig[], path: string) =>
+  config.findIndex((route) => route.path === path);
 
 interface NavProps {
   config: RouteConfig[];
 }
 
 export const Nav: React.FC<NavProps> = ({ config }) => {
+  const location = useLocation<HistoryState>();
+  const history = useHistory<HistoryState>();
+  const currentRouteNum = getRouteNum(config, location.pathname);
+
+  const getOnClick = (path: string) => (ev: React.MouseEvent) => {
+    ev.preventDefault();
+    ev.stopPropagation();
+    history.push({
+      pathname: path,
+      state: {
+        previousRouteNum: currentRouteNum,
+        currentRouteNum: getRouteNum(config, path),
+      },
+    });
+  };
+
   return (
     <nav className={classes.nav}>
       <ul className={classes.navList}>
@@ -27,24 +49,27 @@ export const Nav: React.FC<NavProps> = ({ config }) => {
                 to={route.path}
                 exact
                 className={classes.navLink}
-                activeClassName={classes.navLinkActive}>
+                activeClassName={classes.navLinkActive}
+                onClick={getOnClick(route.path)}>
                 {route.name}
               </NavLink>
             </li>
           ))}
         <li>
           <NavLink
-            to={`/${digits.join('/')}`}
+            to={digitsPath}
             className={classes.navLink}
-            activeClassName={classes.navLinkActive}>
+            activeClassName={classes.navLinkActive}
+            onClick={getOnClick(digitsPath)}>
             0 - 9
           </NavLink>
         </li>
         <li>
           <NavLink
-            to={`/${chars.join('/')}`}
+            to={charsPath}
             className={classes.navLink}
-            activeClassName={classes.navLinkActive}>
+            activeClassName={classes.navLinkActive}
+            onClick={getOnClick(charsPath)}>
             a - z
           </NavLink>
         </li>
