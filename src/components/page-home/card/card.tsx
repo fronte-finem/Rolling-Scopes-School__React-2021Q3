@@ -1,5 +1,6 @@
 import React, { CSSProperties } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { HistoryState } from 'components/app/routing-types';
 import { Format } from 'components/shared/format/format';
 import { Genres } from 'components/shared/genres/genres';
 import { Stats } from 'components/shared/stats/stats';
@@ -16,11 +17,26 @@ export interface MediaProps {
 const getDetailsUrl = (id: number) => `/details/${id}`;
 
 export const Card: React.FC<MediaProps> = ({ media }) => {
+  const history = useHistory<HistoryState>();
+
+  const onClick = (ev: React.MouseEvent) => {
+    ev.preventDefault();
+    ev.stopPropagation();
+    history.push({
+      pathname: getDetailsUrl(media.id),
+      state: {
+        previousRouteNum: 0,
+        currentRouteNum: Infinity,
+      },
+    });
+  };
+
   return (
     <Link
       to={getDetailsUrl(media.id)}
       title={formatRecObj(media.title)}
       className={classes.card}
+      onClick={onClick}
       style={
         {
           '--card-bg-c': media.coverImage?.color || '#fff',

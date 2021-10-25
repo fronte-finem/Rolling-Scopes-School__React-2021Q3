@@ -6,6 +6,8 @@ import { RouteConfig } from './routes-config';
 import { HistoryState } from './routing-types';
 import classesSlideForward from './routing-slide-forward.module.pcss';
 import classesSlideBackward from './routing-slide-backward.module.pcss';
+import classesSlideToBottom from './routing-slide-to-bottom.module.pcss';
+import classesSlideToTop from './routing-slide-to-top.module.pcss';
 import classesErrorAnimation from './routing-error-animation.module.pcss';
 import classes from './main.module.pcss';
 
@@ -18,6 +20,8 @@ const onTransitionEnd = (node: HTMLElement) =>
 const getClassNames = ({ previousRouteNum, currentRouteNum }: HistoryState) => {
   if (previousRouteNum === -1 || currentRouteNum === -1)
     return classesErrorAnimation;
+  if (currentRouteNum === Infinity) return classesSlideToBottom;
+  if (previousRouteNum === Infinity) return classesSlideToTop;
   return currentRouteNum > previousRouteNum
     ? classesSlideForward
     : classesSlideBackward;
