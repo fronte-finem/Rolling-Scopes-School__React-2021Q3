@@ -24,7 +24,9 @@ interface NavProps {
 export const Nav: React.FC<NavProps> = ({ config }) => {
   const location = useLocation<HistoryState>();
   const history = useHistory<HistoryState>();
-  const currentRouteNum = getRouteNum(config, location.pathname);
+
+  const currentRouteNum =
+    location.state.currentRouteNum ?? getRouteNum(config, location.pathname);
 
   const getOnClick = (path: string) => (ev: React.MouseEvent) => {
     ev.preventDefault();

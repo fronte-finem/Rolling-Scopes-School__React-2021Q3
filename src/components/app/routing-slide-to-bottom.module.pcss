@@ -1,0 +1,22 @@
+.enter,
+.exit {
+  composes: page from "./routing-animation.module.pcss";
+}
+.enter-active,
+.exit-active {
+  composes: page-active from "./routing-animation.module.pcss";
+}
+
+.enter {
+  transform: translateY(-100%);
+}
+.enter-active {
+  transform: translateY(0%);
+}
+.exit {
+  transform: translateY(0%);
+}
+.exit-active {
+  transform: translateY(100%);
+}
+
