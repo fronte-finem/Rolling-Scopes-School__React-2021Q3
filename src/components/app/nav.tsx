@@ -26,7 +26,7 @@ export const Nav: React.FC<NavProps> = ({ config }) => {
   const history = useHistory<HistoryState>();
 
   const currentRouteNum =
-    location.state.currentRouteNum ?? getRouteNum(config, location.pathname);
+    location.state?.currentRouteNum ?? getRouteNum(config, location.pathname);
 
   const getOnClick = (path: string) => (ev: React.MouseEvent) => {
     ev.preventDefault();
