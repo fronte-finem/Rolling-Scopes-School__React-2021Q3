@@ -30,6 +30,7 @@ export default defineConfig(({ command, mode }) => {
     css: {
       modules: {
         localsConvention: 'camelCaseOnly',
+        root: '.',
       },
       postcss: './postcss.config.js',
     },
