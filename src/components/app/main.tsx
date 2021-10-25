@@ -3,11 +3,11 @@ import { Route, Switch, useLocation } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { updateTitle } from 'shared/update-title';
 import { RouteConfig } from './routes-config';
-import classes from './content.module.pcss';
+import { HistoryState } from './routing-types';
 import classesSlideForward from './routing-slide-forward.module.pcss';
 import classesSlideBackward from './routing-slide-backward.module.pcss';
 import classesErrorAnimation from './routing-error-animation.module.pcss';
-import { HistoryState } from './routing-types';
+import classes from './main.module.pcss';
 
 const onTransitionBegin = (node: HTMLElement) =>
   node.parentElement?.classList.add(classes.contentAnimation);
@@ -27,7 +27,7 @@ interface RoutesProps {
   config: RouteConfig[];
 }
 
-export const Content: React.FC<RoutesProps> = ({ config }) => {
+export const Main: React.FC<RoutesProps> = ({ config }) => {
   const location = useLocation<HistoryState>();
   const animationClassNames = location.state && getClassNames(location.state);
 
