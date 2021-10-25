@@ -3,7 +3,11 @@ import { Route, Switch, useLocation } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { updateTitle } from 'shared/update-title';
 import { RouteConfig } from './routes-config';
-import classes from './main.module.pcss';
+import classes from './content.module.pcss';
+import classesSlideForward from './routing-slide-forward.module.pcss';
+import classesSlideBackward from './routing-slide-backward.module.pcss';
+import classesErrorAnimation from './routing-error-animation.module.pcss';
+import { HistoryState } from './routing-types';
 
 const onTransitionBegin = (node: HTMLElement) =>
   node.parentElement?.classList.add(classes.contentAnimation);
@@ -11,16 +15,30 @@ const onTransitionBegin = (node: HTMLElement) =>
 const onTransitionEnd = (node: HTMLElement) =>
   node.parentElement?.classList.remove(classes.contentAnimation);
 
+const getClassNames = ({ previousRouteNum, currentRouteNum }: HistoryState) => {
+  if (previousRouteNum === -1 || currentRouteNum === -1)
+    return classesErrorAnimation;
+  return currentRouteNum > previousRouteNum
+    ? classesSlideForward
+    : classesSlideBackward;
+};
+
 interface RoutesProps {
   config: RouteConfig[];
 }
 
-export const Main: React.FC<RoutesProps> = ({ config }) => {
-  const location = useLocation();
+export const Content: React.FC<RoutesProps> = ({ config }) => {
+  const location = useLocation<HistoryState>();
+  const animationClassNames = location.state && getClassNames(location.state);
+
   return (
-    <TransitionGroup className={classes.content}>
+    <TransitionGroup
+      className={classes.content}
+      childFactory={(child) =>
+        React.cloneElement(child, { classNames: animationClassNames })
+      }>
       <CSSTransition
-        classNames={{ ...classes }}
+        classNames={{ ...animationClassNames }}
         key={location.key}
         timeout={500}
         onEnter={onTransitionBegin}
