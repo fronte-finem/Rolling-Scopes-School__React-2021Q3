@@ -25,7 +25,9 @@ describe('Nav', () => {
   it('should add links', () => {
     const { queryAllByTestId } = render(<NavWrapper />);
     const links = queryAllByTestId('nav-link');
-    expect(links).toHaveLength(testConfig.filter((conf) => conf.nav).length);
+    expect(links).toHaveLength(
+      2 + testConfig.filter((conf) => conf.nav).length
+    );
   });
 
   it('should switch routes and add active class', () => {

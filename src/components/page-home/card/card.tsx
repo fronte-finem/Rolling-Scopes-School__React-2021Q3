@@ -34,7 +34,6 @@ export const Card: React.FC<MediaProps> = ({ media }) => {
   return (
     <Link
       to={getDetailsUrl(media.id)}
-      title={`${window.location}${url.slice(1)}`}
       className={classes.card}
       onClick={onClick}
       style={
